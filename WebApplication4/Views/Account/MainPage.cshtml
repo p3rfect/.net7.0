@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+@model User
+
+<div class="text-center">
+    @if (@Model.Role == "admin")
+    {
+        <h1 class="display-4">Welcome admin</h1>
+        <h1>@Model.Email</h1> 
+    }
+    else
+    {
+        <h1 class="display-4">Welcome user</h1>
+        <h1>@Model.Email</h1>
+    }
+
+</div>
