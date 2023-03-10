@@ -52,28 +52,29 @@ public class DatabaseWRK
         dataSource.Open();
         var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = \'{user.Email}\'", dataSource);
         var reader = command.ExecuteReader();
-        
+
         if (reader.Read())
         {
             reader.Dispose();
             dataSource.Dispose();
             return false;
         }
-        else
+        // else
+        // {
+        reader.Dispose();
+        var addСommand = new NpgsqlCommand("INSERT INTO users(login, password, role) VALUES ((@p1), (@p2), (@p3))",
+            dataSource)
         {
-            reader.Dispose();
-            var add_command = new NpgsqlCommand("INSERT INTO users(login, password, role) VALUES ((@p1), (@p2), (@p3))", dataSource)
+            Parameters =
             {
-                Parameters =
-                {
-                    new("p1", user.Email),
-                    new("p2", user.Password),
-                    new("p3", user.Role)
-                }
-            };
-            add_command.ExecuteNonQuery();
-            dataSource.Dispose();
-            return true;
-        }
+                new("p1", user.Email),
+                new("p2", user.Password),
+                new("p3", user.Role)
+            }
+        };
+        addСommand.ExecuteNonQuery();
+        dataSource.Dispose();
+        return true;
+    // }
     }
 }
