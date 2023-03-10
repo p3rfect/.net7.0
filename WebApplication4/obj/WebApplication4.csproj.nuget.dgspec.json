@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj": {}
+    "C:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj": {}
   },
   "projects": {
-    "D:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj": {
+    "C:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj",
+        "projectUniqueName": "C:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj",
         "projectName": "WebApplication4",
-        "projectPath": "D:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj",
-        "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\.net7.0\\WebApplication4\\obj\\",
+        "projectPath": "C:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj",
+        "packagesPath": "C:\\Users\\Никита Галух\\.nuget\\packages\\",
+        "outputPath": "C:\\C#\\.net7.0\\WebApplication4\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Никита Галух\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
