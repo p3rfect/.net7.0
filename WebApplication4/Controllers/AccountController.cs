@@ -33,7 +33,11 @@ namespace WebApplication4.Controllers
             if (user.Password == null)
                 return RedirectToAction("Login", "Account");
             else if (connUser.Password == user.Password)
+            {
+                Console.WriteLine("1");
                 return View(connUser);
+            }
+
             return RedirectToAction("Login", "Account");
         }
     }

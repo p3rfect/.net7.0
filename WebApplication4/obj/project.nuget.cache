@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "LW8nu8tgRuiVHugGt34zpzk6//mXuswR7Yrt4Dnunll+BoCx4RklCMzjJ6AK7zJeDh2Z5hwxNl+nkIET8aRaIA==",
+  "dgSpecHash": "N3SfmJ3M01TdKxCi5/Tkn1TUV5S856nw+gNzPgyRkKCnzdZy0s1qbdqpsCwpIYphRlqF9bPvv9Ad2dEH71fvWg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\WebApplication4\\WebApplication4\\WebApplication4.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Администратор\\.nuget\\packages\\npgsql\\8.0.0-preview.1\\npgsql.8.0.0-preview.1.nupkg.sha512"
+  ],
   "logs": []
 }

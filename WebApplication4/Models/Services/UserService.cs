@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebApplication4.Models.Interfaces;
 using System.Linq;
+using WebApplication4.Database;
 
 namespace WebApplication4.Models.Services
 {
@@ -30,7 +31,8 @@ namespace WebApplication4.Models.Services
 
         User IUserService.GetUserByEmail(string email)
         {
-            return _users.Where(user => user.Email == email).FirstOrDefault();
+           // return _users.Where(user => user.Email == email).FirstOrDefault();
+           return DatabaseWRK.GetUserByEmail(email);
         }
     }
 }
