@@ -28,7 +28,7 @@ namespace WebApplication4.Controllers
         public IActionResult MainPage(User user)
         {
             var connUser = _userService.GetUserByEmail(user.Email);
-            if (connUser == null)
+            if (connUser.Email == null)
                 return RedirectToAction("Login", "Account");
             if (user.Password == null)
                 return RedirectToAction("Login", "Account");
