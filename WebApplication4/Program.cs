@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using WebApplication4.Models.Interfaces;
 using WebApplication4.Models.Services;
+using Microsoft.IdentityModel.Tokens;
+using WebApplication4.jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +11,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddMvc();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => 
+    {
+        options.RequireHttpsMetadata= false;
+        options.TokenValidationParameters = new TokenValidationParameters {
+            ValidateIssuer = true,
+            ValidIssuer = AuthOptions.ISSUER,
+            ValidateAudience = true,
+            ValidAudience = AuthOptions.AUDIENCE,
+            ValidateLifetime = true,
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            ValidateIssuerSigningKey = true
+        };
+        
+    });
+
 
 var app = builder.Build();
 
@@ -18,6 +38,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseFileServer();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -26,9 +47,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapControllerRoute(
     name: "login",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+    pattern: "{controller=Account}/{action=Index}/{id?}");
+
 app.Run();
