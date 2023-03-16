@@ -51,7 +51,13 @@ public class DatabaseWRK
         var connectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";
         var dataSource = new NpgsqlConnection(connectionString);
         dataSource.Open();
-        var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = \'{user.Email}\'", dataSource);
+        var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
+        {
+            Parameters =
+            {
+                new("p1", user.Email)
+            }
+        };
         var reader = command.ExecuteReader();
 
         if (reader.Read())
