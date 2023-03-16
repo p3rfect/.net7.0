@@ -8,10 +8,16 @@ public class DatabaseWRK
 {
     public static User GetUserByEmail(string email)
     {
-        var connectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";
-        var dataSource = NpgsqlDataSource.Create(connectionString);
-       
-        var command = dataSource.CreateCommand($"SELECT * FROM users WHERE login = \'{email}\'");
+        var connectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";  
+        var dataSource = new NpgsqlConnection(connectionString);
+        dataSource.Open();
+        var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
+        {
+            Parameters =
+            {
+                new("p1", email)
+            }
+        };
         var reader = command.ExecuteReader();
         if (reader.Read())
         {

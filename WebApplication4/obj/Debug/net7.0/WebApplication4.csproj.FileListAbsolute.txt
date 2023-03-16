@@ -135,3 +135,10 @@ C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+D:\C#\.net7.0\WebApplication4\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\C#\.net7.0\WebApplication4\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\C#\.net7.0\WebApplication4\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\C#\.net7.0\WebApplication4\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+D:\C#\.net7.0\WebApplication4\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\C#\.net7.0\WebApplication4\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\C#\.net7.0\WebApplication4\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
