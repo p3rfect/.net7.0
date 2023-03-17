@@ -50,32 +50,30 @@ public class DatabaseWRK
             return new User() { Id = null, Email = null, Password = null, Role = null };
         }
     }
-
+    
     //returns false if such user already exists
-    public static bool AddNewUser(User user)
+    public static async Task<bool> AddNewUserAsync(User user)
     {
         var connectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";
-        var dataSource = new NpgsqlConnection(connectionString);
+        await using var dataSource = new NpgsqlConnection(connectionString);
         dataSource.Open();
-        var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
+        await using var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
         {
             Parameters =
             {
                 new("p1", user.Email)
             }
         };
-        var reader = command.ExecuteReader();
+        await using var reader = await command.ExecuteReaderAsync();
 
-        if (reader.Read())
+        if (await reader.ReadAsync())
         {
-            reader.Dispose();
-            dataSource.Dispose();
             return false;
         }
         // else
         // {
-        reader.Dispose();
-        var addСommand = new NpgsqlCommand("INSERT INTO users(login, password, role) VALUES ((@p1), (@p2), (@p3))",
+        await reader.DisposeAsync();
+        await using var addСommand = new NpgsqlCommand("INSERT INTO users(login, password, role) VALUES ((@p1), (@p2), (@p3))",
             dataSource)
         {
             Parameters =
@@ -85,9 +83,8 @@ public class DatabaseWRK
                 new("p3", user.Role)
             }
         };
-        addСommand.ExecuteNonQuery();
-        dataSource.Dispose();
+        await addСommand.ExecuteNonQueryAsync();
         return true;
-    // }
+        // }
     }
 }
