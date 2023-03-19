@@ -6,31 +6,21 @@ namespace WebApplication4.Database;
 
 public class DatabaseWRK
 {
-    public static User GetUserByEmail(string email)
+    public static async Task<User> GetUserByEmailAsync(string email)
     {
         var connectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";  
-        var dataSource = new NpgsqlConnection(connectionString);
+        await using var dataSource = new NpgsqlConnection(connectionString);
         dataSource.Open();
-        var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
+        await using var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
         {
             Parameters =
             {
                 new("p1", email)
             }
         };
-        var reader = command.ExecuteReader();
-        if (reader.Read())
+        await using var reader = await command.ExecuteReaderAsync();
+        if (await reader.ReadAsync())
         {
-            /*
-             return new User()
-            {
-                Id = reader.GetInt32(0),
-                
-                Email = email,
-                Password = reader.GetString(2),
-                Role = reader.GetString(3)
-            };
-             */
             var res = new User()
             {
                 Id = reader.GetInt32(0),
@@ -39,14 +29,14 @@ public class DatabaseWRK
                 Password = reader.GetString(2),
                 Role = reader.GetString(3)
             };
-            reader.Dispose();
-            dataSource.Dispose();
+            await reader.DisposeAsync();
+            await dataSource.DisposeAsync();
             return res;
         }
         else
         { 
-            reader.Dispose();
-            dataSource.Dispose();
+            await reader.DisposeAsync();
+            await dataSource.DisposeAsync();
             return new User() { Id = null, Email = null, Password = null, Role = null };
         }
     }

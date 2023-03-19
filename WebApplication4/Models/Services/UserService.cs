@@ -31,8 +31,8 @@ namespace WebApplication4.Models.Services
 
         User IUserService.GetUserByEmail(string email)
         {
-           // return _users.Where(user => user.Email == email).FirstOrDefault();
-           return DatabaseWRK.GetUserByEmail(email);
+           // return _users.Where(user => user.Email == email).FirstOrDefault()
+           return DatabaseWRK.GetUserByEmailAsync(email);
         }
     }
 }

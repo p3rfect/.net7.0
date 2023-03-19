@@ -528,11 +528,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj",
+      "projectUniqueName": "D:\\12\\.net7.0\\WebApplication4\\WebApplication4.csproj",
       "projectName": "WebApplication4",
-      "projectPath": "D:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj",
+      "projectPath": "D:\\12\\.net7.0\\WebApplication4\\WebApplication4.csproj",
       "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\.net7.0\\WebApplication4\\obj\\",
+      "outputPath": "D:\\12\\.net7.0\\WebApplication4\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",

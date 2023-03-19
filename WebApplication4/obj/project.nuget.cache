@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NkehckcRNdCPP/Vz6Q3jKdQLiOxTNCAYGMHFRcp5PLw7q/sod3dm09sH5QR+9iIv8kB5LsHXeSVqz20h9ubPnQ==",
+  "dgSpecHash": "6DC6pa3EJD5tV2+vG4exoGGUhJh6MNUqMhIQNPFxIH6fdp9Hbjr0h3Br8sS1U84boAznNLtfCIvVgxFb6Rk3AQ==",
   "success": true,
-  "projectFilePath": "D:\\C#\\.net7.0\\WebApplication4\\WebApplication4.csproj",
+  "projectFilePath": "D:\\12\\.net7.0\\WebApplication4\\WebApplication4.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.3\\microsoft.aspnetcore.authentication.jwtbearer.7.0.3.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
