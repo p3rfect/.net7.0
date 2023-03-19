@@ -11,6 +11,7 @@ public class DatabaseWRK
         var connectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";  
         await using var dataSource = new NpgsqlConnection(connectionString);
         dataSource.Open();
+        
         await using var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
         {
             Parameters =
