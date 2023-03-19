@@ -6,10 +6,11 @@ namespace WebApplication4.Database;
 
 public class DatabaseWRK
 {
+    private static readonly string ConnectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";
+    
     public static async Task<User> GetUserByEmailAsync(string email)
     {
-        var connectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";  
-        await using var dataSource = new NpgsqlConnection(connectionString);
+        await using var dataSource = new NpgsqlConnection(ConnectionString);
         dataSource.Open();
         
         await using var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
@@ -45,8 +46,7 @@ public class DatabaseWRK
     //returns false if such user already exists
     public static async Task<bool> AddNewUserAsync(User user)
     {
-        var connectionString = "Host=localhost;Username=admin;Password=admin;Database=practice";
-        await using var dataSource = new NpgsqlConnection(connectionString);
+        await using var dataSource = new NpgsqlConnection(ConnectionString);
         dataSource.Open();
         await using var command = new NpgsqlCommand($"SELECT * FROM users WHERE login = (@p1)", dataSource)
         {
