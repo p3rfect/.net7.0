@@ -189,3 +189,6 @@ D:\12\.net7.0\WebApplication4\obj\Debug\net7.0\refint\WebApplication4.dll
 D:\12\.net7.0\WebApplication4\obj\Debug\net7.0\WebApplication4.pdb
 D:\12\.net7.0\WebApplication4\obj\Debug\net7.0\WebApplication4.genruntimeconfig.cache
 D:\12\.net7.0\WebApplication4\obj\Debug\net7.0\ref\WebApplication4.dll
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\MailKit.dll
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\MimeKit.dll
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\BouncyCastle.Crypto.dll

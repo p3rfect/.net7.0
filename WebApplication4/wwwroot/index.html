@@ -42,7 +42,7 @@
         if (response.ok === true) {
 
             // изменяем содержимое и видимость блоков на странице
-            document.getElementById("userName").innerText = data.username;
+            document.getElementById("userName").innerText = data.email;
             document.getElementById("userInfo").style.display = "block";
             document.getElementById("loginForm").style.display = "none";
             // сохраняем в хранилище sessionStorage токен доступа

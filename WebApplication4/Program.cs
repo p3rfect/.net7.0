@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using WebApplication4.Models.Interfaces;
 using WebApplication4.Models.Services;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddMvc();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IEmailService, EmailService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => 
     {
