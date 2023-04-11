@@ -3,6 +3,11 @@ using WebApplication4.Models.Interfaces;
 using WebApplication4.Models.Services;
 using Microsoft.IdentityModel.Tokens;
 using WebApplication4.jwt;
+using Microsoft.AspNetCore.Builder;
+using WebApplication4.Models;
+using WebApplication4.Database;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Org.BouncyCastle.Utilities.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,4 +55,26 @@ app.MapControllerRoute(
     name: "login",
     pattern: "{controller=Account}/{action=Index}/{id?}");
 
+app.Map("/verifyip", async (string email, HttpContext context) =>
+{
+    User user = await DatabaseWRK.GetUserByEmailAsync(email);
+    if (user.Role != "user")
+    {
+        string safeList = app.Configuration["AdminSafeList"];
+        var remoteIp = context.Connection.RemoteIpAddress;
+        bool result = false;
+        var ipList = safeList.Split(';');
+        foreach (var adress in ipList)
+        {
+            var ip = remoteIp.ToString();
+            if (ip == adress)
+            {
+                result = true;
+                break;
+            }
+        }
+        context.Response.StatusCode = result ? 200 : 500;
+    }
+    else context.Response.StatusCode = 200;
+});
 app.Run();

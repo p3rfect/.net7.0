@@ -16,5 +16,54 @@ namespace WebApplication4.Models.Services
         {
            return await DatabaseWRK.GetUserByEmailAsync(email);
         }
+
+        public async Task<bool> UpdateUserInfo(UserInfo user)
+        {
+            //add method
+            await Task.Delay(0);
+            return true;
+        }
+
+        public async Task<UserInfo> GetUserInfo(string email)
+        {
+            //add method
+            await Task.Delay(0);
+            return new UserInfo();
+        }
+
+        public async Task<List<Specialties>> GetAllSpecialties()
+        {
+            //add method
+            await Task.Delay(0);
+            return new List<Specialties>();
+        }
+
+        public async Task<bool> SaveUserSpecialties(List<Specialties> list)
+        {
+            //add method
+            await Task.Delay(0);
+            return true;
+        }
+
+        public async Task<List<Specialties>> GetUserSpecialties(string email)
+        {
+            //add method
+            await Task.Delay(0);
+            return new List<Specialties>();
+        }
+
+        public async Task<bool> UpdateUserExams(Exams exams)
+        {
+            //add method
+            await Task.Delay(0);
+            return true;
+        }
+
+        public async Task<Exams> GetUserExams(string email)
+        {
+            //add method
+            await Task.Delay(0);
+            return new Exams();
+        }
     }
 }

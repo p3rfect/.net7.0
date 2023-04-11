@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text.Json;
 using WebApplication4.jwt;
 using WebApplication4.Models;
 using WebApplication4.Models.Interfaces;
@@ -47,6 +48,7 @@ namespace WebApplication4.Controllers
         async private Task<ClaimsIdentity> GetIdentity(string email, string password)
         {
             var connUser = await _userService.GetUserByEmail(email);
+
             if (connUser.Email != null && connUser.Password == password)
             {
                 var Claims = new List<Claim> {
@@ -68,13 +70,65 @@ namespace WebApplication4.Controllers
             user.Role = "user";
             bool result = await _userService.AddNewUser(user);
             if(!result) return BadRequest(new { errorText = "User is already exist" });
-            await SendMail(email, "submit letter", "");
+            //await SendMail(email, "submit letter", "");
             return Ok(result);
         }
 
         async private Task SendMail(string email, string subject, string message)
         { 
             await _emailService.SendEmail(email, subject, message);
+        }
+
+        [HttpPost("/postuserinfo")]
+        async public Task<IActionResult> UpdateUserInfo(string str)
+        {
+            UserInfo user = JsonSerializer.Deserialize<UserInfo>(str);
+            bool result = await _userService.UpdateUserInfo(user);
+            return Ok(result);
+        }
+
+        [HttpGet("/getuserinfo")]
+        async public Task<IActionResult> GetUserInfo(string email)
+        {
+            UserInfo result = await _userService.GetUserInfo(email);
+            return Json(result);
+        }
+
+        [HttpGet("/getspecialties")]
+        async public Task<IActionResult> GetAllSpecialties()
+        {
+            var result = await _userService.GetAllSpecialties();
+            return Json(result);
+        }
+
+        [HttpGet("/getuserspecialties")]
+        async public Task<IActionResult> GetUserSpecialties(string email)
+        {
+            var result = await _userService.GetUserSpecialties(email);
+            return Json(result);
+        }
+
+        [HttpPost("/postuserspecialties")]
+        async public Task<IActionResult> UpdateUserSpecialties(string str)
+        {
+            List<Specialties> list = JsonSerializer.Deserialize<List<Specialties>>(str);
+            bool result = await _userService.SaveUserSpecialties(list);
+            return Ok(result);
+        }
+
+        [HttpPost("/postuserexams")]
+        async public Task<IActionResult> UpdateUserExams(string str)
+        {
+            Exams exams = JsonSerializer.Deserialize<Exams>(str);
+            bool result = await _userService.UpdateUserExams(exams);
+            return Ok(result);
+        }
+
+        [HttpGet("/getuserexams")]
+        async public Task<IActionResult> GetUserExams(string email)
+        {
+            Exams result = await _userService.GetUserExams(email);
+            return Json(result);
         }
 
         [Route("/")]
