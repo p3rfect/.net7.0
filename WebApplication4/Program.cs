@@ -32,6 +32,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         
     });
 
+var MyAllowSpecificOrigins = "_MyAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:xxxx")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -46,7 +57,7 @@ if (!app.Environment.IsDevelopment())
 app.UseFileServer();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCors(MyAllowSpecificOrigins); 
 app.UseRouting();
 
 app.UseAuthorization();

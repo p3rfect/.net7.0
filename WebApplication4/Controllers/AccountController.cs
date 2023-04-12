@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -20,6 +21,7 @@ namespace WebApplication4.Controllers
             _emailService = emailService;
         }
 
+        
         [HttpPost("/token")]
         async public Task<IActionResult> Token(string email, string password)
         {
