@@ -1,0 +1,12 @@
+[HttpPost("/token")]  Token(string email, string password) возвращает ок если прошло успешно
+[HttpPost("/register")]  Registrate(string email, string password) возвращает ок если прошло успешно
+
+[HttpPost("/postuserinfo")]  UpdateUserInfo(string userinfojsonstr) возвращает ок если прошло успешно
+[HttpGet("/getuserinfo")]  GetUserInfo(string email) возвращает класс userinfo в json
+
+[HttpGet("/getspecialties")] GetAllSpecialties() возвращает list<spesialties> в json
+[HttpGet("/getuserspecialties")] GetUserSpecialties(string email) возвращает list<spesialties> в json
+[HttpPost("/postuserspecialties")] UpdateUserSpecialties(string listspesialitiesjsonstr) возвращает ок если прошло успешно
+
+[HttpPost("/postuserexams")] UpdateUserExams(string examsjsonstr) возвращает ок если прошло успешно
+[HttpGet("/getuserexams")] GetUserExams(string email) возвращает exams в json
