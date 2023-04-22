@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -21,7 +22,6 @@ namespace WebApplication4.Controllers
             _emailService = emailService;
         }
 
-        
         [HttpPost("/token")]
         async public Task<IActionResult> Token(string email, string password)
         {
@@ -34,7 +34,7 @@ namespace WebApplication4.Controllers
                audience: AuthOptions.AUDIENCE, 
                notBefore: now, 
                claims: identity.Claims, 
-               expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)), 
+               expires: now.Add(TimeSpan.FromHours(AuthOptions.LIFETIME)), 
                signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
@@ -46,7 +46,6 @@ namespace WebApplication4.Controllers
 
             return Json(responce);
         }
-
         async private Task<ClaimsIdentity> GetIdentity(string email, string password)
         {
             var connUser = await _userService.GetUserByEmail(email);
@@ -81,14 +80,16 @@ namespace WebApplication4.Controllers
             await _emailService.SendEmail(email, subject, message);
         }
 
+        [Authorize]
         [HttpPost("/postuserinfo")]
-        async public Task<IActionResult> UpdateUserInfo(string userinfojsonstr)
+        async public Task<IActionResult> UpdateUserInfo(string userInfoJsonStr)
         {
-            UserInfo user = JsonSerializer.Deserialize<UserInfo>(userinfojsonstr);
+            UserInfo user = JsonSerializer.Deserialize<UserInfo>(userInfoJsonStr);
             bool result = await _userService.UpdateUserInfo(user);
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("/getuserinfo")]
         async public Task<IActionResult> GetUserInfo(string email)
         {
@@ -96,6 +97,7 @@ namespace WebApplication4.Controllers
             return Json(result);
         }
 
+        [Authorize]
         [HttpGet("/getspecialties")]
         async public Task<IActionResult> GetAllSpecialties()
         {
@@ -103,6 +105,7 @@ namespace WebApplication4.Controllers
             return Json(result);
         }
 
+        [Authorize]
         [HttpGet("/getuserspecialties")]
         async public Task<IActionResult> GetUserSpecialties(string email)
         {
@@ -110,22 +113,25 @@ namespace WebApplication4.Controllers
             return Json(result);
         }
 
+        [Authorize]
         [HttpPost("/postuserspecialties")]
-        async public Task<IActionResult> UpdateUserSpecialties(string listspesialitiesjsonstr)
+        async public Task<IActionResult> UpdateUserSpecialties(string listSpesialitiesJsonStr)
         {
-            List<Specialties> list = JsonSerializer.Deserialize<List<Specialties>>(listspesialitiesjsonstr);
+            List<Specialty> list = JsonSerializer.Deserialize<List<Specialty>>(listSpesialitiesJsonStr);
             bool result = await _userService.SaveUserSpecialties(list);
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPost("/postuserexams")]
-        async public Task<IActionResult> UpdateUserExams(string examsjsonstr)
+        async public Task<IActionResult> UpdateUserExams(string examsJsonStr)
         {
-            Exams exams = JsonSerializer.Deserialize<Exams>(examsjsonstr);
+            Exams exams = JsonSerializer.Deserialize<Exams>(examsJsonStr);
             bool result = await _userService.UpdateUserExams(exams);
             return Ok(result);
         }
-
+        
+        [Authorize]
         [HttpGet("/getuserexams")]
         async public Task<IActionResult> GetUserExams(string email)
         {

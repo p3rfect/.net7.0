@@ -31,25 +31,25 @@ namespace WebApplication4.Models.Services
             return new UserInfo();
         }
 
-        public async Task<List<Specialties>> GetAllSpecialties()
+        public async Task<List<Specialty>> GetAllSpecialties()
         {
             //add method
             await Task.Delay(0);
-            return new List<Specialties>();
+            return new List<Specialty>();
         }
 
-        public async Task<bool> SaveUserSpecialties(List<Specialties> list)
+        public async Task<bool> SaveUserSpecialties(List<Specialty> list)
         {
             //add method
             await Task.Delay(0);
             return true;
         }
 
-        public async Task<List<Specialties>> GetUserSpecialties(string email)
+        public async Task<List<Specialty>> GetUserSpecialties(string email)
         {
             //add method
             await Task.Delay(0);
-            return new List<Specialties>();
+            return new List<Specialty>();
         }
 
         public async Task<bool> UpdateUserExams(Exams exams)

@@ -2,7 +2,7 @@
 
 namespace WebApplication4.Models
 {
-    public class Specialties
+    public class Specialty
     {
         [JsonPropertyName("FinancingFormPeriod")]
         public List<string> FinancingFormPeriod = new();

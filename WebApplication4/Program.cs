@@ -8,6 +8,7 @@ using WebApplication4.Models;
 using WebApplication4.Database;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Org.BouncyCastle.Utilities.Net;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,8 @@ builder.Services.AddCors();
 
 var app = builder.Build();
 
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -48,16 +51,15 @@ app.UseFileServer();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
 app.UseRouting();
-app.UseCors(builder => builder.AllowAnyOrigin());
-
 app.UseAuthorization();
-
+app.UseCors(builder => builder.AllowAnyOrigin());
 app.MapControllerRoute(
     name: "login",
     pattern: "{controller=Account}/{action=Index}/{id?}");
 
-app.Map("/verifyip", async (string email, HttpContext context) =>
+app.Map("/verifyip", [Authorize] async (string email, HttpContext context) =>
 {
     User user = await DatabaseWRK.GetUserByEmailAsync(email);
     if (user.Role != "user")
@@ -79,4 +81,5 @@ app.Map("/verifyip", async (string email, HttpContext context) =>
     }
     else context.Response.StatusCode = 200;
 });
+
 app.Run();
