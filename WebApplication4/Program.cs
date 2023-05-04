@@ -53,8 +53,10 @@ app.UseStaticFiles();
 
 
 app.UseRouting();
-app.UseAuthorization();
 app.UseCors(builder => builder.AllowAnyOrigin());
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllerRoute(
     name: "login",
     pattern: "{controller=Account}/{action=Index}/{id?}");

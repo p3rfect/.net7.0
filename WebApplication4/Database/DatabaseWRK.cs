@@ -79,9 +79,9 @@
             return true;
         }
 
-        public static async Task<List<Specialties>> GetUserSpecialtiesAsync(string email)
+        public static async Task<List<Specialty>> GetUserSpecialtiesAsync(string email)
         {
-            var ans = new List<Specialties>();
+            var ans = new List<Specialty>();
             await using var dataSource = new NpgsqlConnection(ConnectionString);
             await dataSource.OpenAsync();
 
@@ -111,7 +111,7 @@
                     new NpgsqlCommand("SELECT * FROM speciality WHERE speciality_id  = @p1", dataSource);
                 takeSpeciality.Parameters.AddWithValue("@p1", specialityId);
                 await using var readSpeciality = await takeSpeciality.ExecuteReaderAsync();
-                Specialties newUserSpecialtiy = new Specialties()
+                Specialty newUserSpecialtiy = new Specialty()
                 {
                     IsPhysics = readSpeciality.GetBoolean(7),
                     SpecialtyFacultyAndName = readSpeciality.GetString(2) + ' ' + readSpeciality.GetString(3)
@@ -154,16 +154,16 @@
             await dataSource.DisposeAsync();
             return false;
         }*/
-        public static async Task<List<Specialties>> GetAllSpecialtiesAsync()
+        public static async Task<List<Specialty>> GetAllSpecialtiesAsync()
         {
             await using var dataSource = new NpgsqlConnection(ConnectionString);
             await dataSource.OpenAsync();
-            var ans = new List<Specialties>();
+            var ans = new List<Specialty>();
             await using var findSpecialties = new NpgsqlCommand("SELECT * FROM speciality", dataSource);
             await using var readSpecialties = await findSpecialties.ExecuteReaderAsync();
             while (await readSpecialties.ReadAsync())
             {
-                Specialties newSpecialties = new Specialties()
+                Specialty newSpecialties = new Specialty()
                 {
                     IsPhysics = readSpecialties.GetBoolean(7),
                     SpecialtyFacultyAndName = readSpecialties.GetString(2) + ' ' + readSpecialties.GetString(3)

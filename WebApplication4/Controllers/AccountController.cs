@@ -65,10 +65,12 @@ namespace WebApplication4.Controllers
         [HttpPost("/register")]
         async public Task<IActionResult> Registrate(string email, string password)
         {
-            User user = new();
-            user.Email = email;
-            user.Password = password;
-            user.Role = "user";
+            User user = new()
+            {
+                Email = email,
+                Password = password,
+                Role = "user"
+            };
             bool result = await _userService.AddNewUser(user);
             if(!result) return BadRequest(new { errorText = "User is already exist" });
             //await SendMail(email, "submit letter", "");
