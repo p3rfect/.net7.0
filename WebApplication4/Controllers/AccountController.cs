@@ -146,5 +146,19 @@ namespace WebApplication4.Controllers
         {
             return View();
         }
+
+
+
+        [Authorize]
+        [HttpGet("/test")]
+        public IActionResult test()
+        {
+            var result = new
+            {
+                asd = "jh",
+                gfd = "hkkbjn"
+            };
+            return Json(result);
+        }
     }
 }
