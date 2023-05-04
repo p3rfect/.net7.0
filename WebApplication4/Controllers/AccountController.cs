@@ -41,7 +41,8 @@ namespace WebApplication4.Controllers
             var responce = new
             {
                 access_token = encodedJwt,
-                email = identity.Name
+                email = identity.Name,
+                role = identity.Claims.ToList()[1].Value
             };
 
             return Json(responce);
