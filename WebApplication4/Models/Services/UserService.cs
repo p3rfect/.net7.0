@@ -17,7 +17,7 @@ namespace WebApplication4.Models.Services
            return await DatabaseWRK.GetUserByEmailAsync(email);
         }
 
-        public async Task<bool> UpdateUserInfo(UserInfo user)
+        public async Task<bool> UpdateUserInfo(UserInfo user, string email)
         {
             //add method
             await Task.Delay(0);
@@ -33,12 +33,10 @@ namespace WebApplication4.Models.Services
 
         public async Task<List<Specialty>> GetAllSpecialties()
         {
-            //add method
-            await Task.Delay(0);
-            return new List<Specialty>();
+            return await DatabaseWRK.GetAllSpecialtiesAsync();
         }
 
-        public async Task<bool> SaveUserSpecialties(List<Specialty> list)
+        public async Task<bool> SaveUserSpecialties(List<Specialty> list, string email)
         {
             //add method
             await Task.Delay(0);
@@ -47,12 +45,10 @@ namespace WebApplication4.Models.Services
 
         public async Task<List<Specialty>> GetUserSpecialties(string email)
         {
-            //add method
-            await Task.Delay(0);
-            return new List<Specialty>();
+            return await DatabaseWRK.GetUserSpecialtiesAsync(email);
         }
 
-        public async Task<bool> UpdateUserExams(Exams exams)
+        public async Task<bool> UpdateUserExams(Exams exams, string email)
         {
             //add method
             await Task.Delay(0);
