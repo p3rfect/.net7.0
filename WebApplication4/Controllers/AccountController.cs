@@ -22,7 +22,7 @@ namespace WebApplication4.Controllers
             _emailService = emailService;
         }
 
-        [HttpPost("/token")]
+        [HttpPost("/token/getnew")]
         async public Task<IActionResult> Token(string email, string password)
         {
             var identity = await GetIdentity(email, password);
@@ -63,6 +63,13 @@ namespace WebApplication4.Controllers
             return null;
         }
 
+        [Authorize]
+        [HttpGet("/token/isvalid")]
+        public IActionResult IsTokenValid()
+        {
+            return Json(true);
+        }
+
         [HttpPost("/register")]
         async public Task<IActionResult> Registrate(string email, string password)
         {
@@ -84,7 +91,7 @@ namespace WebApplication4.Controllers
         }
 
         [Authorize]
-        [HttpPost("/postuserinfo")]
+        [HttpPost("/user/info/update")]
         async public Task<IActionResult> UpdateUserInfo(string userInfoJsonStr, string email)
         {
             UserInfo user = JsonSerializer.Deserialize<UserInfo>(userInfoJsonStr);
@@ -93,7 +100,7 @@ namespace WebApplication4.Controllers
         }
 
         [Authorize]
-        [HttpGet("/getuserinfo")]
+        [HttpGet("/user/info/get")]
         async public Task<IActionResult> GetUserInfo(string email)
         {
             UserInfo result = await _userService.GetUserInfo(email);
@@ -101,7 +108,7 @@ namespace WebApplication4.Controllers
         }
 
         [Authorize]
-        [HttpGet("/getspecialties")]
+        [HttpGet("/allspecialties/get")]
         async public Task<IActionResult> GetAllSpecialties()
         {
             var result = await _userService.GetAllSpecialties();
@@ -109,7 +116,7 @@ namespace WebApplication4.Controllers
         }
 
         [Authorize]
-        [HttpGet("/getuserspecialties")]
+        [HttpGet("/user/specialties/get")]
         async public Task<IActionResult> GetUserSpecialties(string email)
         {
             var result = await _userService.GetUserSpecialties(email);
@@ -117,7 +124,7 @@ namespace WebApplication4.Controllers
         }
 
         [Authorize]
-        [HttpPost("/postuserspecialties")]
+        [HttpPost("/user/specialties/update")]
         async public Task<IActionResult> UpdateUserSpecialties(string listSpesialitiesJsonStr, string email)
         {
             List<Specialty> list = JsonSerializer.Deserialize<List<Specialty>>(listSpesialitiesJsonStr);
@@ -126,7 +133,7 @@ namespace WebApplication4.Controllers
         }
 
         [Authorize]
-        [HttpPost("/postuserexams")]
+        [HttpPost("/user/exams/update")]
         async public Task<IActionResult> UpdateUserExams(string examsJsonStr, string email)
         {
             Exams exams = JsonSerializer.Deserialize<Exams>(examsJsonStr);
@@ -135,7 +142,7 @@ namespace WebApplication4.Controllers
         }
         
         [Authorize]
-        [HttpGet("/getuserexams")]
+        [HttpGet("/user/exams/get")]
         async public Task<IActionResult> GetUserExams(string email)
         {
             Exams result = await _userService.GetUserExams(email);

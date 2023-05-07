@@ -16,7 +16,7 @@ namespace WebApplication4.Models
         [JsonPropertyName("MathExam")]
         public string MathExam { get; set; } = "";
 
-        [JsonPropertyName("SpecialtyExam")]
+        [JsonPropertyName("PhysicsExam")]
         public string PhysicsExam { get; set; } = "";
 
         [JsonPropertyName("LanguageScore")]
@@ -24,9 +24,9 @@ namespace WebApplication4.Models
 
         [JsonPropertyName("MathScore")]
         public int MathScore { get; set; } = 0;
-
-        [JsonPropertyName("SpecialtyMark")]
-        public int PhysicsMark { get; set; } = 0;
+        
+        [JsonPropertyName("PhysicsScore")]
+        public int PhysicsScore { get; set; } = 0;
 
         [JsonPropertyName("LanguageMark")]
         public int LanguageMark { get; set; } = 0;
@@ -34,7 +34,7 @@ namespace WebApplication4.Models
         [JsonPropertyName("MathMark")]
         public int MathMark { get; set; } = 0;
 
-        [JsonPropertyName("SpecialtyName")]
-        public int PhysicsScore { get; set; } = 0;
+       [JsonPropertyName("PhysicsMark")]
+        public int PhysicsMark { get; set; } = 0;
     }
 }

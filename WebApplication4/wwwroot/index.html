@@ -30,7 +30,7 @@
         formData.append("password", document.getElementById("passwordLogin").value);
 
         // отправляет запрос и получаем ответ
-        const response = await fetch("/token", {
+        const response = await fetch("/token/getnew", {
             method: "POST",
             headers: { "Accept": "application/json" },
             body: formData
