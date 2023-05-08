@@ -223,7 +223,9 @@
         {
             Exams ans = new Exams();
             await using var dataSource = new NpgsqlConnection(ConnectionString);
+            await using var dataSource1 = new NpgsqlConnection(ConnectionString);
             await dataSource.OpenAsync();
+            await dataSource1.OpenAsync();
             await using var findSpecialties = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource)
             {
                 Parameters =
@@ -237,9 +239,28 @@
             {
                 userId = readUser.GetInt32(0);
             }
-            await readUser.DisposeAsync();
-            
-            await dataSource.CloseAsync();
+            await using var findExam = new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1", dataSource1)
+            {
+                Parameters =
+                {
+                    new("p1", userId)
+                }
+            };
+            await using var readExam = await findSpecialties.ExecuteReaderAsync();
+            if (await readExam.ReadAsync())
+            {
+                ans.IsRussian = readExam.GetBoolean(1);
+                ans.IsPhysics = readExam.GetBoolean(2);
+                ans.LanguageExam = readExam.GetString(3);
+                ans.MathExam = readExam.GetString(4);
+                ans.PhysicsExam = readExam.GetString(5);
+                ans.LanguageScore = readExam.GetInt32(6);
+                ans.MathScore = readExam.GetInt32(7);
+                ans.PhysicsScore = readExam.GetInt32(8);
+                ans.LanguageMark = readExam.GetInt32(9);
+                ans.MathMark = readExam.GetInt32(10);
+                ans.PhysicsMark = readExam.GetInt32(11);
+            }
             return ans;
         }
     }
