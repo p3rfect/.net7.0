@@ -35,7 +35,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddCors();
-
+builder.Services.Configure<WebEncoderOptions>(options =>
+{
+    options.TextEncoderSettings = new System
+        .Text.Encodings.Web
+        .TextEncoderSettings(System.Text.Unicode.UnicodeRanges.All);
+});
 var app = builder.Build();
 
 
