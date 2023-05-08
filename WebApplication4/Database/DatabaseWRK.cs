@@ -101,10 +101,9 @@
             {
                 userId = reader0.GetInt32(0);
             }
-            else
-            {
-                return ans;
-            }
+
+            await reader0.DisposeAsync();
+            await command0.DisposeAsync();
 
             await using var takeUserSpeciality =
                 new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1", dataSource2)
@@ -147,9 +146,19 @@
                     newUserSpecialtiy.FinancingFormPeriod.Add(readTime.GetString(1));
                 }
 
+                await takeSpeciality.DisposeAsync();
+                await readSpeciality.DisposeAsync();
+                await takeTime.DisposeAsync();
+                await readTime.DisposeAsync();
                 ans.Add(newUserSpecialtiy);
             }
 
+            await takeUserSpeciality.DisposeAsync();
+            await readUserSpeciality.DisposeAsync();
+            await dataSource.CloseAsync();
+            await dataSource2.CloseAsync();
+            await dataSource3.CloseAsync();
+            await dataSource4.CloseAsync();
             return ans;
         }
 
@@ -249,7 +258,7 @@
                     new("p1", userId)
                 }
             };
-            await using var readExam = await findSpecialties.ExecuteReaderAsync();
+            await using var readExam = await findExam.ExecuteReaderAsync();
             if (await readExam.ReadAsync())
             {
                 ans.IsRussian = readExam.GetBoolean(1);
@@ -264,11 +273,14 @@
                 ans.MathMark = readExam.GetInt32(10);
                 ans.PhysicsMark = readExam.GetInt32(11);
             }
-
-            
             await readExam.DisposeAsync();
             await dataSource.CloseAsync();
             await dataSource1.CloseAsync();
             return ans;
         }
+
+      /*  public static async Task<bool> UpdateUserExamsAsync(Exams exams, string email)
+        {
+            
+        }*/
     }
