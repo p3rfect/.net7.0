@@ -219,7 +219,7 @@
             return ans;
         }
 
-        public static async Task<Exams> GetUserExamsAsunc(string email)
+        public static async Task<Exams> GetUserExamsAsync(string email)
         {
             Exams ans = new Exams();
             await using var dataSource = new NpgsqlConnection(ConnectionString);
