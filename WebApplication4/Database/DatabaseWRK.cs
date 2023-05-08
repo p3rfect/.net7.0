@@ -240,8 +240,9 @@
                 userId = readUser.GetInt32(0);
             }
 
+            await findSpecialties.DisposeAsync();
             await readUser.DisposeAsync();
-            await using var findExam = new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1", dataSource1)
+            await using var findExam = new NpgsqlCommand("SELECT * FROM exams WHERE user_id = @p1", dataSource1)
             {
                 Parameters =
                 {
@@ -264,6 +265,7 @@
                 ans.PhysicsMark = readExam.GetInt32(11);
             }
 
+            
             await readExam.DisposeAsync();
             await dataSource.CloseAsync();
             await dataSource1.CloseAsync();
