@@ -177,7 +177,12 @@
                     newSpecialties.FinancingFormPeriod.Add(readTime.GetString(1));
                 }
                 ans.Add(newSpecialties);
+                await readTime.DisposeAsync();
             }
+
+            await readSpecialties.DisposeAsync();
+            await dataSource.DisposeAsync();
             return ans;
         }
+        
     }
