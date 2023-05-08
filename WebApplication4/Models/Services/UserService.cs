@@ -57,9 +57,7 @@ namespace WebApplication4.Models.Services
 
         public async Task<Exams> GetUserExams(string email)
         {
-            //add method
-            await Task.Delay(0);
-            return new Exams();
+            return await DatabaseWRK.GetUserExamsAsync(email);
         }
     }
 }
