@@ -9,6 +9,7 @@ using WebApplication4.Database;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Org.BouncyCastle.Utilities.Net;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.WebEncoders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddCors();
+
+builder.Services.Configure<WebEncoderOptions>(options =>
+{
+    options.TextEncoderSettings = new System
+        .Text.Encodings.Web
+        .TextEncoderSettings(System.Text.Unicode.UnicodeRanges.All);
+});
 
 var app = builder.Build();
 
