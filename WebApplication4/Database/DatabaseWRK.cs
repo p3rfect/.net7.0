@@ -190,7 +190,7 @@
                 Specialty newSpecialties = new Specialty()
                 {
                     IsPhysics = readSpecialties.GetBoolean(7),
-                    SpecialtyFacultyAndName = readSpecialties.GetString(2) + ' ' + readSpecialties.GetString(3)
+                    SpecialtyFacultyAndName = readSpecialties.GetString(3) + ' ' + readSpecialties.GetString(2)
                 };
                 int dp = readSpecialties.GetInt32(0);
                 await using var takeTime =
@@ -239,6 +239,8 @@
             {
                 userId = readUser.GetInt32(0);
             }
+
+            await readUser.DisposeAsync();
             await using var findExam = new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1", dataSource1)
             {
                 Parameters =
@@ -261,6 +263,10 @@
                 ans.MathMark = readExam.GetInt32(10);
                 ans.PhysicsMark = readExam.GetInt32(11);
             }
+
+            await readExam.DisposeAsync();
+            await dataSource.CloseAsync();
+            await dataSource1.CloseAsync();
             return ans;
         }
     }
