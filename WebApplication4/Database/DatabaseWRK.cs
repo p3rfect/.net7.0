@@ -200,6 +200,7 @@
             {
                 Specialty newSpecialties = new Specialty()
                 {
+                    SpecialtyCode = readSpecialties.GetString(1),
                     IsPhysics = readSpecialties.GetBoolean(7),
                     SpecialtyFacultyAndName = readSpecialties.GetString(3) + ' ' + readSpecialties.GetString(2)
                 };
