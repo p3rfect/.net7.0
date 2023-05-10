@@ -50,9 +50,7 @@ namespace WebApplication4.Models.Services
 
         public async Task<bool> UpdateUserExams(Exams exams, string email)
         {
-            //add method
-            await Task.Delay(0);
-            return true;
+            return await DatabaseWRK.UpdateUserExamsAsync(exams, email);
         }
 
         public async Task<Exams> GetUserExams(string email)
