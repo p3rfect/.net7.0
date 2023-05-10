@@ -126,11 +126,13 @@
                             new("p1", specialityId)
                         }
                     };
+                
                 await using var readSpeciality = await takeSpeciality.ExecuteReaderAsync();
                 Specialty newUserSpecialtiy = new Specialty()
                 {
+                    SpecialtyCode = readSpeciality.GetString(1),
                     IsPhysics = readSpeciality.GetBoolean(7),
-                    SpecialtyFacultyAndName = readSpeciality.GetString(2) + ' ' + readSpeciality.GetString(3)
+                    SpecialtyFacultyAndName = readSpeciality.GetString(2) + ';' + readSpeciality.GetString(3)
                 };
                 await using var takeTime =
                     new NpgsqlCommand("SELECT * FROM specialityPeriodAndTime WHERE speciality_id  = @p1", dataSource4)
@@ -279,8 +281,94 @@
             return ans;
         }
 
-      /*  public static async Task<bool> UpdateUserExamsAsync(Exams exams, string email)
+        public static async Task<bool> UpdateUserExamsAsync(Exams exams, string email)
         {
-            
-        }*/
+            await using var dataSource = new NpgsqlConnection(ConnectionString);
+            await using var dataSource2 = new NpgsqlConnection(ConnectionString);
+            await dataSource.OpenAsync();
+            await dataSource2.OpenAsync();
+            await using var findUser = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource)
+            {
+                Parameters =
+                {
+                    new("p1", email)
+                }
+            };
+            await using var readUser = await findUser.ExecuteReaderAsync();
+            int userId = 0;
+            if (await readUser.ReadAsync())
+            {
+                userId = readUser.GetInt32(0);
+            }
+            else
+            {
+                await dataSource.CloseAsync();
+                await dataSource2.CloseAsync();
+                await readUser.DisposeAsync();
+                return false;
+            }
+            await readUser.DisposeAsync();
+            await dataSource.CloseAsync();
+            await using var findExam = new NpgsqlCommand("SELECT * FROM exams WHERE user_id = @p1", dataSource)
+            {
+                Parameters =
+                {
+                    new("p1", userId)
+                }
+            };
+            await using var readExam = await findUser.ExecuteReaderAsync();
+            if (await readExam.ReadAsync())
+            {
+                await using var addExam = new NpgsqlCommand(
+                    "INSERT INTO exams(user_id, IsRussian, IsPhysics, LanguageExam, MathExam, PhysicsExam, LanguageScore, MathScore, PhysicsScore, LanguageMark, MathMark, PhysicsMark) VALUES (@p1), (@p2), (@p3), (@p4), (@p5), (@p6), (@p7), (@p8), (@p9), (@p10), (@p11), (@p12))",
+                    dataSource2)
+                {
+                    Parameters =
+                    {
+                        new("p1", userId),
+                        new("p2",exams.IsRussian ),
+                        new("p3", exams.IsPhysics),
+                        new("p4", exams.LanguageExam),
+                        new("p5", exams.MathExam),
+                        new("p6", exams.PhysicsExam),
+                        new("p7", exams.LanguageScore),
+                        new("p8", exams.MathScore),
+                        new("p9", exams.PhysicsScore),
+                        new("p10", exams.LanguageMark),
+                        new("p11", exams.MathMark),
+                        new("p12", exams.PhysicsMark)
+                    }
+                };
+                await addExam.ExecuteNonQueryAsync();
+                await addExam.DisposeAsync();
+            }
+            else
+            {
+                await using var editExam = new NpgsqlCommand(
+                    "UPDATE exams SET IsRussian = @p2, IsPhysics = @p3, LanguageExam = @p4, MathExam = @p5, PhysicsExam = @p6, LanguageScore = @p7, MathScore = @p8, PhysicsScore = @p9, LanguageMark = @p10, MathMark = @p11, PhysicsMark = @p12 WHERE user_id = @p1",
+                    dataSource2)
+                {
+                    Parameters =
+                    {
+                        new("p1", userId),
+                        new("p2", exams.IsRussian),
+                        new("p3", exams.IsPhysics),
+                        new("p4", exams.LanguageExam),
+                        new("p5", exams.MathExam),
+                        new("p6", exams.PhysicsExam),
+                        new("p7", exams.LanguageScore),
+                        new("p8", exams.MathScore),
+                        new("p9", exams.PhysicsScore),
+                        new("p10", exams.LanguageMark),
+                        new("p11", exams.MathMark),
+                        new("p12", exams.PhysicsMark)
+                    }
+                };
+                await editExam.ExecuteNonQueryAsync();
+                await editExam.DisposeAsync();
+            }
+
+            await dataSource2.CloseAsync();
+            return true;
+        }
     }
