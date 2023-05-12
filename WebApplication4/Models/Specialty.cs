@@ -6,7 +6,7 @@ namespace WebApplication4.Models
     {
         
         [JsonPropertyName("FinancingFormPeriod")]
-        public List<string> FinancingFormPeriod = new(); // format: "financing,form,period" ("бюджет,дневная,полная")
+        public List<string> FinancingFormPeriod { get; set; } = new(); // format: "financing,form,period" ("бюджет,дневная,полная")
 
         [JsonPropertyName("SpecialtyFacultyAndName")]
         public string SpecialtyFacultyAndName { get; set; } = ""; // format: "Faculty.Name" ("ФКСиС.ИиТП")

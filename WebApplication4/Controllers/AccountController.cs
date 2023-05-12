@@ -125,10 +125,10 @@ namespace WebApplication4.Controllers
 
         [Authorize]
         [HttpPost("/user/specialties/update")]
-        async public Task<IActionResult> UpdateUserSpecialties(string listSpesialitiesJsonStr, string email)
+        async public Task<IActionResult> UpdateUserSpecialties(string userSpesialitiesJsonStr, string email)
         {
-            List<Specialty> list = JsonSerializer.Deserialize<List<Specialty>>(listSpesialitiesJsonStr);
-            bool result = await _userService.SaveUserSpecialties(list, email);
+            UserSpecialties specialties = JsonSerializer.Deserialize<UserSpecialties>(userSpesialitiesJsonStr);
+            bool result = await _userService.SaveUserSpecialties(specialties, email);
             return Ok(result);
         }
 

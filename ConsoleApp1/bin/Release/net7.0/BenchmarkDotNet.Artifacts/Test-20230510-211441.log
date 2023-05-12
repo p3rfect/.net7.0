@@ -1,0 +1,7 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 1 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet  restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\ConsoleApp1\bin\Release\net7.0\48d93bfa-3e52-4284-81ea-dd4fb6d1c7ea
+// command took 2,13s and exited with 0
+// start dotnet  build -c Release --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true in C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\ConsoleApp1\bin\Release\net7.0\48d93bfa-3e52-4284-81ea-dd4fb6d1c7ea
