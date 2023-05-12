@@ -9,7 +9,7 @@ namespace WebApplication4.Models.Interfaces
         Task<bool> UpdateUserInfo(UserInfo user, string email);
         Task<UserInfo> GetUserInfo(string email);
         Task<List<Specialty>> GetAllSpecialties();
-        Task<bool> SaveUserSpecialties(UserSpecialties specialties, string email);
+        Task<bool> UpdateUserSpecialties(UserSpecialties specialties, string email);
         Task<UserSpecialties> GetUserSpecialties(string email);
         Task<bool> UpdateUserExams(Exams exams, string email);
         Task<Exams> GetUserExams(string email);

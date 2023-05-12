@@ -94,8 +94,8 @@ namespace WebApplication4.Controllers
         [HttpPost("/user/info/update")]
         async public Task<IActionResult> UpdateUserInfo(string userInfoJsonStr, string email)
         {
-            UserInfo user = JsonSerializer.Deserialize<UserInfo>(userInfoJsonStr);
-            bool result = await _userService.UpdateUserInfo(user, email);
+            UserInfo info = JsonSerializer.Deserialize<UserInfo>(userInfoJsonStr);
+            bool result = await _userService.UpdateUserInfo(info, email);
             return Ok(result);
         }
 
@@ -125,10 +125,10 @@ namespace WebApplication4.Controllers
 
         [Authorize]
         [HttpPost("/user/specialties/update")]
-        async public Task<IActionResult> UpdateUserSpecialties(string userSpesialitiesJsonStr, string email)
+        async public Task<IActionResult> UpdateUserSpecialties(string userSpecialtiesJsonStr, string email)
         {
-            UserSpecialties specialties = JsonSerializer.Deserialize<UserSpecialties>(userSpesialitiesJsonStr);
-            bool result = await _userService.SaveUserSpecialties(specialties, email);
+            UserSpecialties specialties = JsonSerializer.Deserialize<UserSpecialties>(userSpecialtiesJsonStr);
+            bool result = await _userService.UpdateUserSpecialties(specialties, email);
             return Ok(result);
         }
 

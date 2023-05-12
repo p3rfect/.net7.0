@@ -36,7 +36,7 @@ namespace WebApplication4.Models.Services
             return await DatabaseWRK.GetAllSpecialtiesAsync();
         }
 
-        public async Task<bool> SaveUserSpecialties(UserSpecialties specialties, string email)
+        public async Task<bool> UpdateUserSpecialties(UserSpecialties specialties, string email)
         {
             //add method
             await Task.Delay(0);
