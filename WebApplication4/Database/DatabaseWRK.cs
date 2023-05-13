@@ -4,6 +4,7 @@
 
     using Npgsql;
 
+    using System.Text;
     namespace WebApplication4.Database;
 
     public class DatabaseWRK
@@ -320,6 +321,7 @@
             await using var readExam = await findExam.ExecuteReaderAsync();
             if (await readExam.ReadAsync())
             {
+                Console.WriteLine(exams.PhysicsExam);
                 await using var editExam = new NpgsqlCommand(
                     "UPDATE exams SET IsRussian = @p2, IsPhysics = @p3, LanguageExam = @p4, MathExam = @p5, PhysicsExam = @p6, LanguageScore = @p7, MathScore = @p8, PhysicsScore = @p9, LanguageMark = @p10, MathMark = @p11, PhysicsMark = @p12 WHERE user_id = @p1",
                     dataSource2)
@@ -329,7 +331,7 @@
                         new("p1", userId),
                         new("p2", exams.IsRussian),
                         new("p3", exams.IsPhysics),
-                        new("p4", exams.LanguageExam),
+                        new("p4", exams.LanguageExam),  
                         new("p5", exams.MathExam),
                         new("p6", exams.PhysicsExam),
                         new("p7", exams.LanguageScore),
