@@ -4,7 +4,7 @@ namespace WebApplication4.Models.Services
 {
     public class AdminService : IAdminService
     {
-        private readonly IUserService _userService=new UserService();
+        private readonly IUserService _userService = new UserService();
         public async Task<bool> DeleteUser(string email)
         {
             //add method
@@ -16,7 +16,7 @@ namespace WebApplication4.Models.Services
         {
             //add method
             await Task.Delay(0);
-            return new List<string>() ;
+            return new List<string>();
         }
 
         public async Task<(UserInfo, Exams, UserSpecialties)> GetUser(string email)

@@ -18,11 +18,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddMvc();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IEmailService, EmailService>();
+builder.Services.AddSingleton<IAdminService, AdminService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options => 
+    .AddJwtBearer(options =>
     {
-        options.RequireHttpsMetadata= false;
-        options.TokenValidationParameters = new TokenValidationParameters {
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
             ValidateIssuer = true,
             ValidIssuer = AuthOptions.ISSUER,
             ValidateAudience = true,
@@ -31,7 +33,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
             ValidateIssuerSigningKey = true
         };
-        
+
     });
 
 builder.Services.AddCors();

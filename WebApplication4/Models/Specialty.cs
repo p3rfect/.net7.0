@@ -4,7 +4,7 @@ namespace WebApplication4.Models
 {
     public class Specialty
     {
-        
+
         [JsonPropertyName("FinancingFormPeriod")]
         public List<string> FinancingFormPeriod { get; set; } = new(); // format: "financing,form,period" ("бюджет,дневная,полная")
 
@@ -15,6 +15,6 @@ namespace WebApplication4.Models
         public bool IsPhysics { get; set; } = true;
 
         [JsonPropertyName("SpecialtyCode")]
-        public string SpecialtyCode { get; set; }="";
+        public string SpecialtyCode { get; set; } = "";
     }
 }

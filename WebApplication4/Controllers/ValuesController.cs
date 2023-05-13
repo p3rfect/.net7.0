@@ -9,14 +9,14 @@ namespace WebApplication4.Controllers
     {
         [Authorize]
         [Route("getlogin")]
-        public IActionResult GetLogin() 
+        public IActionResult GetLogin()
         {
             return Ok($"Login: {User.Identity.Name}");
         }
 
         [Authorize(Roles = "admin")]
         [Route("getrole")]
-        public IActionResult GetRole() 
+        public IActionResult GetRole()
         {
             return Ok($"Role: admin");
         }

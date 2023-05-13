@@ -26,15 +26,15 @@ namespace WebApplication4.Controllers
         async public Task<IActionResult> Token(string email, string password)
         {
             var identity = await GetIdentity(email, password);
-            if (identity == null) 
-                return BadRequest(new {errorText="Invalid user name or password"});
+            if (identity == null)
+                return BadRequest(new { errorText = "Invalid user name or password" });
             var now = DateTime.UtcNow;
             var jwt = new JwtSecurityToken(
-               issuer: AuthOptions.ISSUER, 
-               audience: AuthOptions.AUDIENCE, 
-               notBefore: now, 
-               claims: identity.Claims, 
-               expires: now.Add(TimeSpan.FromHours(AuthOptions.LIFETIME)), 
+               issuer: AuthOptions.ISSUER,
+               audience: AuthOptions.AUDIENCE,
+               notBefore: now,
+               claims: identity.Claims,
+               expires: now.Add(TimeSpan.FromHours(AuthOptions.LIFETIME)),
                signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
@@ -57,7 +57,7 @@ namespace WebApplication4.Controllers
                     new Claim(ClaimsIdentity.DefaultNameClaimType, connUser.Email),
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, connUser.Role)
                 };
-                ClaimsIdentity identity = new (Claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+                ClaimsIdentity identity = new(Claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                 return identity;
             }
             return null;
@@ -80,13 +80,13 @@ namespace WebApplication4.Controllers
                 Role = "user"
             };
             bool result = await _userService.AddNewUser(user);
-            if(!result) return BadRequest(new { errorText = "User is already exist" });
+            if (!result) return BadRequest(new { errorText = "User is already exist" });
             //await SendMail(email, "submit letter", "");
             return Ok(result);
         }
 
         async private Task SendMail(string email, string subject, string message)
-        { 
+        {
             await _emailService.SendEmail(email, subject, message);
         }
 
@@ -140,7 +140,7 @@ namespace WebApplication4.Controllers
             bool result = await _userService.UpdateUserExams(exams, email);
             return Ok(result);
         }
-        
+
         [Authorize]
         [HttpGet("/user/exams/get")]
         async public Task<IActionResult> GetUserExams(string email)

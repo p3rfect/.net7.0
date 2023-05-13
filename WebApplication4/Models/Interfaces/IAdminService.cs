@@ -2,7 +2,7 @@
 {
     public interface IAdminService
     {
-        Task<List<string>> GetAllUsersEmails(); 
+        Task<List<string>> GetAllUsersEmails();
 
         Task<(UserInfo, Exams, UserSpecialties)> GetUser(string email);
 

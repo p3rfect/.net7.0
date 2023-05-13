@@ -31,14 +31,14 @@ namespace WebApplication4.Controllers
             return Json(result);
         }
 
-        [Authorize(Roles="admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost("/admin/user/update")]
         async public Task<IActionResult> UpdateUser(string email, string userInfoJsonStr, string userExamsJsonStr, string userSpecialtiesJsonStr)
         {
             UserInfo info = JsonSerializer.Deserialize<UserInfo>(userInfoJsonStr);
             Exams exams = JsonSerializer.Deserialize<Exams>(userExamsJsonStr);
             UserSpecialties specialties = JsonSerializer.Deserialize<UserSpecialties>(userSpecialtiesJsonStr);
-            var result =  await _adminService.UpdateUser(email, info, exams, specialties); 
+            var result = await _adminService.UpdateUser(email, info, exams, specialties);
             return Json(result);
         }
 
