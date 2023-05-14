@@ -5,6 +5,7 @@ namespace WebApplication4.Models.Interfaces
     public interface IUserService
     {
         Task<User> GetUserByEmail(string email);
+        Task<bool> ConfirmEmail(string email);
         Task<bool> AddNewUser(User user);
         Task<bool> UpdateUserInfo(UserInfo user, string email);
         Task<UserInfo> GetUserInfo(string email);

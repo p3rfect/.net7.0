@@ -59,5 +59,11 @@ namespace WebApplication4.Models.Services
         {
             return await DatabaseWRK.GetUserExamsAsync(email);
         }
+
+        public async Task<bool> ConfirmEmail(string email)
+        {
+            await Task.Delay(0);
+            return true;
+        }
     }
 }

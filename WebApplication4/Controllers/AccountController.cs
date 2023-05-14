@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json;
 using WebApplication4.jwt;
 using WebApplication4.Models;
 using WebApplication4.Models.Interfaces;
+using WebApplication4.Models.Services;
 
 namespace WebApplication4.Controllers
 {
@@ -47,11 +49,12 @@ namespace WebApplication4.Controllers
 
             return Json(responce);
         }
+
         async private Task<ClaimsIdentity> GetIdentity(string email, string password)
         {
             var connUser = await _userService.GetUserByEmail(email);
 
-            if (connUser.Email != null && connUser.Password == password)
+            if (connUser.Email != null && connUser.Password == password && connUser.Confirmed==true)
             {
                 var Claims = new List<Claim> {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, connUser.Email),
@@ -77,11 +80,20 @@ namespace WebApplication4.Controllers
             {
                 Email = email,
                 Password = password,
-                Role = "user"
+                Role = "user",
+                Confirmed = false
             };
             bool result = await _userService.AddNewUser(user);
             if (!result) return BadRequest(new { errorText = "User is already exist" });
-            //await SendMail(email, "submit letter", "");
+
+            var callbackUrl = Url.Action(
+                        "ConfirmEmail",
+                        "Account",
+                        user.Email,
+                        protocol: HttpContext.Request.Scheme);
+
+            //await SendMail(email, "Confirm your account", $"Confirm your registration by following the link: <a href='{callbackUrl}'>link</a>");
+
             return Ok(result);
         }
 
@@ -105,6 +117,12 @@ namespace WebApplication4.Controllers
         {
             UserInfo result = await _userService.GetUserInfo(email);
             return Json(result);
+        }
+
+        [AllowAnonymous]
+        public async Task<bool> ConfirmEmail(string email) 
+        {
+            return await _userService.ConfirmEmail(email);
         }
 
         [Authorize]

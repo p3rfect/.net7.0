@@ -4,7 +4,13 @@ namespace WebApplication4.Models.Services
 {
     public class AdminService : IAdminService
     {
-        private readonly IUserService _userService = new UserService();
+        private IUserService _userService = new UserService();
+
+        public async Task<bool> ConfirmUser(string email)
+        {
+            return await _userService.ConfirmEmail(email);
+        }
+
         public async Task<bool> DeleteUser(string email)
         {
             //add method
