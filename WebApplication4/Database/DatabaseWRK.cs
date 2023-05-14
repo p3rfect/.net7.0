@@ -164,30 +164,6 @@
             await dataSource4.CloseAsync();
             return ans;
         }
-
-        /* public static async Task<bool> UpdateUserInfoAsync(UserInfo user, string email)
-        {
-            await using var dataSource = new NpgsqlConnection(ConnectionString);
-            await dataSource.OpenAsync();
-            await using var takeUser = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource);
-            takeUser.Parameters.AddWithValue("@p1", email);
-            await using var readUser = await takeUser.ExecuteReaderAsync();
-            if (await readUser.ReadAsync())
-            {
-                int userId = readUser.GetInt32(0);
-                await using var findInfo = new NpgsqlCommand("SELECT * FROM UserInfo WHERE user_id = @p1", dataSource);
-                findInfo.Parameters.AddWithValue("@p1", email);
-                await using var readInfo = await findInfo.ExecuteReaderAsync();
-                if (await readInfo.ReadAsync())
-                {
-                    await using var command = 
-                        new NpgsqlCommand("UPDATE UserInfo SET speciality_name = @newName WHERE speciality_id = @id", dataSource);
-                }
-            }
-
-            await dataSource.DisposeAsync();
-            return false;
-        }*/
         public static async Task<List<Specialty>> GetAllSpecialtiesAsync()
         {
             await using var dataSource = new NpgsqlConnection(ConnectionString);
@@ -321,7 +297,6 @@
             await using var readExam = await findExam.ExecuteReaderAsync();
             if (await readExam.ReadAsync())
             {
-                Console.WriteLine(exams.PhysicsExam);
                 await using var editExam = new NpgsqlCommand(
                     "UPDATE exams SET IsRussian = @p2, IsPhysics = @p3, LanguageExam = @p4, MathExam = @p5, PhysicsExam = @p6, LanguageScore = @p7, MathScore = @p8, PhysicsScore = @p9, LanguageMark = @p10, MathMark = @p11, PhysicsMark = @p12 WHERE user_id = @p1",
                     dataSource2)
@@ -374,6 +349,123 @@
             }
 
             await dataSource.CloseAsync();  
+            await dataSource2.CloseAsync();
+            return true;
+        }
+        public static async Task<bool> UpdateUserSpecialtiesAsync(UserSpecialties specialties, string email){
+            await using var dataSource = new NpgsqlConnection(ConnectionString);
+            await using var dataSource2 = new NpgsqlConnection(ConnectionString);
+            await dataSource.OpenAsync();
+            await dataSource2.OpenAsync();
+            await using var findUser = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource)
+            {
+                Parameters =
+                {
+                    new("p1", email)
+                }
+            };
+            await using var readUser = await findUser.ExecuteReaderAsync();
+            int userId = 0;
+            if (await readUser.ReadAsync())
+            {
+                userId = readUser.GetInt32(0);
+            }
+            else
+            {
+                await dataSource.CloseAsync();
+                await dataSource2.CloseAsync();
+                await readUser.DisposeAsync();
+                return false;
+            }
+
+            await readUser.DisposeAsync();
+
+            for (int i = 0; i < specialties.SpecialtiesCodes.Count; i++)
+            {
+                await using var findSpecialities  = new NpgsqlCommand("SELECT * FROM specialities WHERE code = @p1", dataSource)
+                {
+                    Parameters =
+                    {
+                        new("p1", specialties.SpecialtiesCodes[i])
+                    }
+                };
+                await using var readSpecialities = await findSpecialities.ExecuteReaderAsync();
+                int specialitiesId = 0;
+                if (await readSpecialities.ReadAsync())
+                {
+                    specialitiesId = readSpecialities.GetInt32(0);
+                }
+
+                await findSpecialities.DisposeAsync();
+                await readSpecialities.DisposeAsync();
+                int points = 0;
+                
+                await using var findExams  = new NpgsqlCommand("SELECT * FROM exams WHERE user_id = @p1", dataSource)
+                {
+                    Parameters =
+                    {
+                        new("p1", userId)
+                    }
+                };
+                await using var readExams = await findExams.ExecuteReaderAsync();
+                if (await readExams.ReadAsync())
+                {
+                    points += readExams.GetInt32(6);
+                    points += readExams.GetInt32(7);
+                    points += readExams.GetInt32(8);
+                }
+
+                await findExams.DisposeAsync();
+                await readExams.DisposeAsync();
+                
+                await using var findUserSpecialities  = new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1 AND speciality_id = @p2", dataSource)
+                {
+                    Parameters =
+                    {
+                        new("p1", userId),
+                        new ("p2",specialitiesId)
+                    }
+                };
+                await using var readUserSpecialities = await findUserSpecialities.ExecuteReaderAsync();
+                if (await readUserSpecialities.ReadAsync())
+                {
+                    await using var editUserSpecialities = new NpgsqlCommand(
+                        "UPDATE exams SET priority = @p2, user_points = @p3 WHERE user_id = @p1 AND speciality_id = @p2",
+                        dataSource2)
+                    {
+                        Parameters =
+                        {
+                            new("p1", userId),
+                            new("p2", specialitiesId),
+                            new("p3", i),
+                            new("p4", points),
+                        }
+                    };
+                    await editUserSpecialities.ExecuteNonQueryAsync();
+                    await editUserSpecialities.DisposeAsync();
+                }
+                else
+                {
+                    await using var insertUserSpecialities = new NpgsqlCommand(
+                        "INSERT INTO user_specialities(user_id, priority, speciality_id, user_points) VALUES (@p1, @p2, @p3, @p4)",
+                        dataSource2)
+                    {
+                        Parameters =
+                        {
+                            new NpgsqlParameter("p1", userId),
+                            new NpgsqlParameter("p2", i),
+                            new NpgsqlParameter("p3", specialitiesId),
+                            new NpgsqlParameter("p4", points)
+                        }
+                    };
+                    await insertUserSpecialities.ExecuteNonQueryAsync();
+                    await insertUserSpecialities.DisposeAsync();
+                }
+                await findUserSpecialities.DisposeAsync();
+                await readUserSpecialities.DisposeAsync();
+            }
+
+            await dataSource.CloseAsync();
             await dataSource2.CloseAsync();
             return true;
         }
