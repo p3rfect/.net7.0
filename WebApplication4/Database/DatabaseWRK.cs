@@ -179,7 +179,7 @@
                 {
                     SpecialtyCode = readSpecialties.GetString(1),
                     IsPhysics = readSpecialties.GetBoolean(7),
-                    SpecialtyFacultyAndName = readSpecialties.GetString(3) + ' ' + readSpecialties.GetString(2)
+                    SpecialtyFacultyAndName = readSpecialties.GetString(3) + ';' + readSpecialties.GetString(2)
                 };
                 int dp = readSpecialties.GetInt32(0);
                 await using var takeTime =
@@ -355,8 +355,10 @@
         public static async Task<bool> UpdateUserSpecialtiesAsync(UserSpecialties specialties, string email){
             await using var dataSource = new NpgsqlConnection(ConnectionString);
             await using var dataSource2 = new NpgsqlConnection(ConnectionString);
+            await using var dataSource3 = new NpgsqlConnection(ConnectionString);
             await dataSource.OpenAsync();
             await dataSource2.OpenAsync();
+            await dataSource3.OpenAsync();
             await using var findUser = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource)
             {
                 Parameters =
@@ -374,15 +376,17 @@
             {
                 await dataSource.CloseAsync();
                 await dataSource2.CloseAsync();
+                await dataSource3.CloseAsync();
                 await readUser.DisposeAsync();
                 return false;
             }
 
             await readUser.DisposeAsync();
+            await findUser.DisposeAsync();
 
             for (int i = 0; i < specialties.SpecialtiesCodes.Count; i++)
             {
-                await using var findSpecialities  = new NpgsqlCommand("SELECT * FROM specialities WHERE code = @p1", dataSource)
+                await using var findSpecialities  = new NpgsqlCommand("SELECT * FROM specialities WHERE code = @p1", dataSource2)
                 {
                     Parameters =
                     {
@@ -400,7 +404,7 @@
                 await readSpecialities.DisposeAsync();
                 int points = 0;
                 
-                await using var findExams  = new NpgsqlCommand("SELECT * FROM exams WHERE user_id = @p1", dataSource)
+                await using var findExams  = new NpgsqlCommand("SELECT * FROM exams WHERE user_id = @p1", dataSource2)
                 {
                     Parameters =
                     {
@@ -418,7 +422,7 @@
                 await findExams.DisposeAsync();
                 await readExams.DisposeAsync();
                 
-                await using var findUserSpecialities  = new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1 AND speciality_id = @p2", dataSource)
+                await using var findUserSpecialities  = new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1 AND speciality_id = @p2", dataSource2)
                 {
                     Parameters =
                     {
@@ -431,7 +435,7 @@
                 {
                     await using var editUserSpecialities = new NpgsqlCommand(
                         "UPDATE exams SET priority = @p2, user_points = @p3 WHERE user_id = @p1 AND speciality_id = @p2",
-                        dataSource2)
+                        dataSource3)
                     {
                         Parameters =
                         {
@@ -448,7 +452,7 @@
                 {
                     await using var insertUserSpecialities = new NpgsqlCommand(
                         "INSERT INTO user_specialities(user_id, priority, speciality_id, user_points) VALUES (@p1, @p2, @p3, @p4)",
-                        dataSource2)
+                        dataSource3)
                     {
                         Parameters =
                         {
@@ -467,6 +471,88 @@
 
             await dataSource.CloseAsync();
             await dataSource2.CloseAsync();
+            await dataSource3.CloseAsync();
+            return true;
+        }
+
+        public static async Task<bool> GetUserInfoAsync(UserSpecialties specialties, string email)
+        {
+            await using var dataSource = new NpgsqlConnection(ConnectionString);
+            await using var dataSource2 = new NpgsqlConnection(ConnectionString);
+            await using var dataSource3 = new NpgsqlConnection(ConnectionString);
+            await dataSource.OpenAsync();
+            await dataSource2.OpenAsync();
+            await dataSource3.OpenAsync();
+            await using var findUser = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource)
+            {
+                Parameters =
+                {
+                    new("p1", email)
+                }
+            };
+            await using var readUser = await findUser.ExecuteReaderAsync();
+            int userId = 0;
+            if (await readUser.ReadAsync())
+            {
+                userId = readUser.GetInt32(0);
+            }
+            else
+            {
+                await dataSource.CloseAsync();
+                await dataSource2.CloseAsync();
+                await dataSource3.CloseAsync();
+                await readUser.DisposeAsync();
+                return false;
+            }
+
+            await readUser.DisposeAsync();
+            await findUser.DisposeAsync();
+                
+            await dataSource.CloseAsync();
+            await dataSource2.CloseAsync();
+            await dataSource3.CloseAsync();
             return true;
         }
     }
+/*
+IsMale BOOLEAN,
+IsSingle BOOLEAN,
+DocumentType VARCHAR(255),
+IdentyNumber VARCHAR(255),
+Series VARCHAR(255),
+Number VARCHAR(255),
+DateOfIssue VARCHAR(255),
+Validity VARCHAR(255),
+IssuedBy VARCHAR(255),
+Education VARCHAR(255),
+InstitutionType VARCHAR(255),
+Document VARCHAR(255),
+Institution VARCHAR(255),
+DocumentNumber VARCHAR(255),
+GraduationDate VARCHAR(255),
+Language VARCHAR(255),
+AverageScore INTEGER,
+PostalCode
+Country
+Region
+District
+LocalityType
+LocalityName
+StreetType
+Street
+HouseNumber
+HousingNumber
+FlatNumber
+PhoneNumber
+Benefits
+FatherType
+FatherLastname
+FatherFirstname
+FatherSurname
+FatherAddress
+MotherType
+MotherLastname
+MotherFirstname
+MotherSurname
+MotherAddress
+*/

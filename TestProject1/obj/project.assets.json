@@ -6323,23 +6323,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\adoku\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Администратор\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\TestProject1\\TestProject1.csproj",
+      "projectUniqueName": "D:\\C#\\.net7.0-main\\TestProject1\\TestProject1.csproj",
       "projectName": "TestProject1",
-      "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\TestProject1\\TestProject1.csproj",
-      "packagesPath": "C:\\Users\\adoku\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\TestProject1\\obj\\",
+      "projectPath": "D:\\C#\\.net7.0-main\\TestProject1\\TestProject1.csproj",
+      "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
+      "outputPath": "D:\\C#\\.net7.0-main\\TestProject1\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\adoku\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6348,14 +6344,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\WebApplication4.csproj": {
-              "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\WebApplication4.csproj"
+            "D:\\C#\\.net7.0-main\\WebApplication4\\WebApplication4.csproj": {
+              "projectPath": "D:\\C#\\.net7.0-main\\WebApplication4\\WebApplication4.csproj"
             }
           }
         }
