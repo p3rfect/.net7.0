@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Test-20230514-134527</title>
+<title>Test-20230514-205210</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -16,16 +16,17 @@
 BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19044.2965/21H2/November2021Update)
 Intel Core i5-8265U CPU 1.60GHz (Whiskey Lake), 1 CPU, 8 logical and 4 physical cores
 .NET SDK=7.0.102
-  [Host]     : .NET 7.0.2 (7.0.222.60605), X64 RyuJIT AVX2 [AttachedDebugger]
-  Job-TMTKTI : .NET 7.0.2 (7.0.222.60605), X64 RyuJIT AVX2
+  [Host]     : .NET 7.0.2 (7.0.222.60605), X64 RyuJIT AVX2
+  Job-MNDDMO : .NET 7.0.2 (7.0.222.60605), X64 RyuJIT AVX2
 </code></pre>
 <pre><code>IterationCount=10  
 </code></pre>
 
 <table>
-<thead><tr><th>Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th>
+<thead><tr><th>         Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th>
 </tr>
-</thead><tbody><tr><td>Test1</td><td>4.086 s</td><td>1.293 s</td><td>0.8551 s</td><td>1.00</td>
+</thead><tbody><tr><td>GetUserToken2000</td><td>432.4 ms</td><td>5.58 ms</td><td>3.69 ms</td><td>1.00</td><td>0.00</td>
+</tr><tr><td>GetAllSpecialties2000</td><td>6,235.8 ms</td><td>110.81 ms</td><td>57.96 ms</td><td>14.39</td><td>0.14</td>
 </tr></tbody></table>
 </body>
 </html>

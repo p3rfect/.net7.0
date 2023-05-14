@@ -54,7 +54,7 @@ namespace WebApplication4.Controllers
         {
             var connUser = await _userService.GetUserByEmail(email);
 
-            if (connUser.Email != null && connUser.Password == password && connUser.Confirmed==true)
+            if (connUser.Email != null && connUser.Password == password /*&& connUser.Confirmed==true*/)
             {
                 var Claims = new List<Claim> {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, connUser.Email),
@@ -104,9 +104,8 @@ namespace WebApplication4.Controllers
 
         [Authorize]
         [HttpPost("/user/info/update")]
-        async public Task<IActionResult> UpdateUserInfo(string userInfoJsonStr, string email)
+        async public Task<IActionResult> UpdateUserInfo(UserInfo info, string email)
         {
-            UserInfo info = JsonSerializer.Deserialize<UserInfo>(userInfoJsonStr);
             bool result = await _userService.UpdateUserInfo(info, email);
             return Ok(result);
         }
@@ -143,18 +142,16 @@ namespace WebApplication4.Controllers
 
         [Authorize]
         [HttpPost("/user/specialties/update")]
-        async public Task<IActionResult> UpdateUserSpecialties(string userSpecialtiesJsonStr, string email)
+        async public Task<IActionResult> UpdateUserSpecialties(UserSpecialties specialties, string email)
         {
-            UserSpecialties specialties = JsonSerializer.Deserialize<UserSpecialties>(userSpecialtiesJsonStr);
             bool result = await _userService.UpdateUserSpecialties(specialties, email);
             return Ok(result);
         }
 
         [Authorize]
         [HttpPost("/user/exams/update")]
-        async public Task<IActionResult> UpdateUserExams(string examsJsonStr, string email)
+        async public Task<IActionResult> UpdateUserExams(Exams exams, string email)
         {
-            Exams exams = JsonSerializer.Deserialize<Exams>(examsJsonStr);
             bool result = await _userService.UpdateUserExams(exams, email);
             return Ok(result);
         }

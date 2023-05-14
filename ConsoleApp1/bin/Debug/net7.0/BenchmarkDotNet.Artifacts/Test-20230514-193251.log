@@ -1,0 +1,11 @@
+// Validating benchmarks:
+//    * Only 1 benchmark method in a group can have "Baseline = true" applied to it, group Job-DKAHFK(IterationCount=10) in class Test has 2
+
+//    * Assembly BenchmarkConsoleApp which defines benchmarks references non-optimized WebApplication4
+	If you own this dependency, please, build it in RELEASE.
+	If you don't, you can disable this policy by using 'config.WithOptions(ConfigOptions.DisableOptimizationsValidator)'.
+
+//    * Assembly BenchmarkConsoleApp which defines benchmarks is non-optimized
+Benchmark was built without optimization enabled (most probably a DEBUG configuration). Please, build it in RELEASE.
+If you want to debug the benchmarks, please see https://benchmarkdotnet.org/articles/guides/troubleshooting.html#debugging-benchmarks.
+
