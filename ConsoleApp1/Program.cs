@@ -23,14 +23,14 @@ public class Test
         IUserService userService = new UserService();
         IEmailService emailService = new EmailService();
         AccountController accountController=new(userService, emailService);
-        Parallel.For(0, 2000, (o1, o2) =>
+        for(int i = 0; i < 2000; i++)
         {
-            _ = ThreadPool.QueueUserWorkItem((worker) =>
-            {
-                _ = accountController.Token("adokuchaeva11@gmail.com", "aaaaaaaaaa");
-
-            });
-        });
+            //_ = ThreadPool.QueueUserWorkItem((worker) =>
+            //{
+                Task.Run(() => accountController.Token("adokuchaeva11@gmail.com", "aaaaaaaaaa"));
+            Console.WriteLine(i);
+            //});
+        }
         
     }
 }

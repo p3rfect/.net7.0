@@ -49,5 +49,13 @@ namespace WebApplication4.Controllers
             bool result = await _adminService.DeleteUser(email);
             return Json(result);
         }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost("/admin/user/confirm")]
+        async public Task<IActionResult> ConfirmUser(string email)
+        {
+            bool result = await _adminService.ConfirmUser(email);
+            return Json(result);
+        }
     }
 }

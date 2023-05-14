@@ -13,7 +13,9 @@ namespace TestProject1
     {
         IUserService userService = new UserService();
         IEmailService emailService = new EmailService();
+
         AccountController accountController;
+
         public UnitTest1()
         {
             accountController = new(userService, emailService);
@@ -25,7 +27,6 @@ namespace TestProject1
             var result = accountController.Token("adokuchaeva11@gmail.com", "aaaaaaaaaa").Result as JsonResult;
             Assert.Null(result.StatusCode);
         }
-
 
         [Fact]
         public void Test2()
@@ -69,6 +70,7 @@ namespace TestProject1
                 new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерных систем и сетей Электронные вычислительные средства", IsPhysics=true, SpecialtyCode ="40 02 02" },
                 new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерных систем и сетей Вычислительные машины, системы и сети", IsPhysics=true, SpecialtyCode = "40 02 01" }
             };
+
             var res = result.Value as List<Specialty>;
             for (int i = 0; i < res.Count; i++)
             {
