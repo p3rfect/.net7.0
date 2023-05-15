@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\WebApplication4.bundle.scp.css",
-      "PackagePath": "staticwebassets\\WebApplication4.bundle.scp.css"
+      "Id": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\ASPZIZ.bundle.scp.css",
+      "PackagePath": "staticwebassets\\ASPZIZ.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\wwwroot\\css\\site.css",
@@ -249,20 +249,20 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.WebApplication4.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.ASPZIZ.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.WebApplication4.props",
-      "PackagePath": "build\\WebApplication4.props"
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.ASPZIZ.props",
+      "PackagePath": "build\\ASPZIZ.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.WebApplication4.props",
-      "PackagePath": "buildMultiTargeting\\WebApplication4.props"
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.ASPZIZ.props",
+      "PackagePath": "buildMultiTargeting\\ASPZIZ.props"
     },
     {
-      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.WebApplication4.props",
-      "PackagePath": "buildTransitive\\WebApplication4.props"
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.ASPZIZ.props",
+      "PackagePath": "buildTransitive\\ASPZIZ.props"
     }
   ],
   "ElementsToRemove": []
