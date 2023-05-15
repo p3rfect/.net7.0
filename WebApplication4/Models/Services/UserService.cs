@@ -2,6 +2,7 @@
 using WebApplication4.Models.Interfaces;
 using System.Linq;
 using WebApplication4.Database;
+//add method
 
 namespace WebApplication4.Models.Services
 {
@@ -62,6 +63,8 @@ namespace WebApplication4.Models.Services
 
         public async Task<bool> ConfirmEmail(string email)
         {
+
+            //add method
             await Task.Delay(0);
             return true;
         }

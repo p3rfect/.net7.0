@@ -1989,7 +1989,7 @@
           "build/netcoreapp3.1/xunit.runner.visualstudio.props": {}
         }
       },
-      "WebApplication4/1.0.0": {
+      "ASPZIZ/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
@@ -1998,10 +1998,10 @@
           "Npgsql": "8.0.0-preview.1"
         },
         "compile": {
-          "bin/placeholder/WebApplication4.dll": {}
+          "bin/placeholder/ASPZIZ.dll": {}
         },
         "runtime": {
-          "bin/placeholder/WebApplication4.dll": {}
+          "bin/placeholder/ASPZIZ.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -6307,16 +6307,16 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "WebApplication4/1.0.0": {
+    "ASPZIZ/1.0.0": {
       "type": "project",
-      "path": "../WebApplication4/WebApplication4.csproj",
-      "msbuildProject": "../WebApplication4/WebApplication4.csproj"
+      "path": "../WebApplication4/ASPZIZ.csproj",
+      "msbuildProject": "../WebApplication4/ASPZIZ.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "ASPZIZ >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
-      "WebApplication4 >= 1.0.0",
       "coverlet.collector >= 3.2.0",
       "xunit >= 2.4.2",
       "xunit.runner.visualstudio >= 2.4.5"
@@ -6354,8 +6354,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\WebApplication4.csproj": {
-              "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\WebApplication4.csproj"
+            "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj": {
+              "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj"
             }
           }
         }

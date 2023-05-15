@@ -102,6 +102,12 @@ namespace WebApplication4.Controllers
             await _emailService.SendEmail(email, subject, message);
         }
 
+        [AllowAnonymous]
+        public async Task<bool> ConfirmEmail(string email) 
+        {
+            return await _userService.ConfirmEmail(email);
+        }
+
         [Authorize]
         [HttpPost("/user/info/update")]
         async public Task<IActionResult> UpdateUserInfo(UserInfo info, string email)
@@ -116,12 +122,6 @@ namespace WebApplication4.Controllers
         {
             UserInfo result = await _userService.GetUserInfo(email);
             return Json(result);
-        }
-
-        [AllowAnonymous]
-        public async Task<bool> ConfirmEmail(string email) 
-        {
-            return await _userService.ConfirmEmail(email);
         }
 
         [Authorize]

@@ -859,9 +859,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\WebApplication4.csproj",
-      "projectName": "WebApplication4",
-      "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\WebApplication4.csproj",
+      "projectUniqueName": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj",
+      "projectName": "ASPZIZ",
+      "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj",
       "packagesPath": "C:\\Users\\adoku\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\obj\\",
       "projectStyle": "PackageReference",

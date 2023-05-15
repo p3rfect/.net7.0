@@ -13,37 +13,39 @@ namespace TestProject1
     {
         IUserService userService = new UserService();
         IEmailService emailService = new EmailService();
+        IAdminService adminService = new AdminService();
 
         AccountController accountController;
-
+        AdminController adminController;
         public UnitTest1()
         {
             accountController = new(userService, emailService);
+            adminController = new(adminService);
         }
 
         [Fact]
-        public void Test1()
+        public void TokenValidParams()
         {
             var result = accountController.Token("adokuchaeva11@gmail.com", "aaaaaaaaaa").Result as JsonResult;
             Assert.Null(result.StatusCode);
         }
 
         [Fact]
-        public void Test2()
+        public void TokenInvalidParams()
+        {
+            var result = accountController.Token("adokuchaeva11@gmail.com", "gjhbk").Result as JsonResult;
+            Assert.True(result is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void RegistrateExistedUser()
         {
             var result = accountController.Registrate("adokuchaeva11@gmail.com", "aaaaaaaaaa").Result;
             Assert.True(result is BadRequestObjectResult);
         }
 
         [Fact]
-        public void Test3()
-        {
-            var result = accountController.Token("adokuchaeva11@gmail.com", "aaa").Result as JsonResult;
-            Assert.Null(result);
-        }
-
-        [Fact]
-        public void Test4()
+        public void AllExamsList()
         {
             var result = accountController.GetAllSpecialties().Result as JsonResult;
             List<Specialty> res1 = new()
@@ -79,6 +81,147 @@ namespace TestProject1
                 Assert.Equal(res[i].FinancingFormPeriod, res1[i].FinancingFormPeriod);
                 Assert.Equal(res[i].IsPhysics, res1[i].IsPhysics);
             }
+        }
+
+        [Fact]
+        public void UpdateValidUserInfo()
+        {
+            var result = accountController.UpdateUserInfo(new UserInfo(),"adokuchaeva11@gmail.com").Result as JsonResult;
+            Assert.True(result is OkObjectResult);
+        }
+
+        [Fact]
+        public void UpdateInvalidUserInfo()
+        {
+            var result = accountController.UpdateUserInfo(new UserInfo(), "adokua11@gmail.com").Result as JsonResult;
+            Assert.True(result is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void GetValidUserInfo()
+        {
+            var result = accountController.GetUserInfo("adokuchaeva11@gmail.com").Result as JsonResult;
+            Assert.Equal(result.Value, new UserInfo());
+        }
+
+        [Fact]
+        public void GetInvalidUserInfo()
+        {
+            var result = accountController.GetUserInfo("adokua11@gmail.com").Result as JsonResult;
+            Assert.True(result is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void UpdateValidUserSpecialties()
+        {
+            var result = accountController.UpdateUserSpecialties(new UserSpecialties(), "adokuchaeva11@gmail.com").Result as JsonResult;
+            Assert.True(result is OkObjectResult);
+        }
+
+        [Fact]
+        public void UpdateInvalidUserSpecialties()
+        {
+            var result = accountController.UpdateUserSpecialties(new UserSpecialties(), "adokua11@gmail.com").Result as JsonResult;
+            Assert.True(result is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void GetValidUserSpecialties()
+        {
+            var result = accountController.GetUserSpecialties("adokuchaeva11@gmail.com").Result as JsonResult;
+            Assert.Equal(result.Value, new UserSpecialties());
+        }
+
+        [Fact]
+        public void GetInvalidUserSpecialties()
+        {
+            var result = accountController.GetUserSpecialties("adokua11@gmail.com").Result as JsonResult;
+            Assert.True(result is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void UpdateValidUserExams()
+        {
+            var result = accountController.UpdateUserExams(new Exams(), "adokuchaeva11@gmail.com").Result as JsonResult;
+            Assert.True(result is OkObjectResult);
+        }
+
+        [Fact]
+        public void UpdateInvalidUserExams()
+        {
+            var result = accountController.UpdateUserExams(new Exams(), "adokua11@gmail.com").Result as JsonResult;
+            Assert.True(result is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void GetValidUserExams()
+        {
+            var result = accountController.GetUserExams("adokuchaeva11@gmail.com").Result as JsonResult;
+            Assert.Equal(result.Value, new Exams());
+        }
+
+        [Fact]
+        public void GetInvalidUserExams()
+        {
+            var result = accountController.GetUserExams("adokua11@gmail.com").Result as JsonResult;
+            Assert.True(result is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void AllUsersList()
+        {
+            var result = adminController.GetAllUsers().Result as JsonResult;
+            List<string> emails = new(){};
+
+            var res = result.Value as List<string>;
+            for (int i = 0; i < res.Count; i++)
+            {
+                Assert.Equal(emails[i], res[i]);
+            }
+        }
+
+
+
+        [Fact]
+        public void GetValidUser()
+        {
+            var result = adminController.GetUser("adokuchaeva11@gmail.com").Result as JsonResult;
+            Assert.Equal(result.Value, (new UserInfo(), new UserSpecialties(), new Exams()));
+        }
+
+        [Fact]
+        public void GetInvalidUser()
+        {
+            var result = adminController.GetUser("adokua11@gmail.com").Result as JsonResult;
+            Assert.True(result is BadRequestObjectResult);
+        }
+
+        [Fact]
+        public void UpdateValidUser()
+        {
+            var result = adminController.UpdateUser("adokuchaeva11@gmail.com", new UserInfo(), new Exams(), new UserSpecialties()).Result as JsonResult;
+            Assert.Equal(result.Value, (true, true, true));
+        }
+
+        [Fact]
+        public void UpdateInvalidUser()
+        {
+            var result = adminController.UpdateUser("adokua11@gmail.com", new UserInfo(), new Exams(), new UserSpecialties()).Result as JsonResult;
+            Assert.NotEqual(result.Value, (true, true, true));
+        }
+
+        [Fact]
+        public void ConfirmValidEmail()
+        {
+            var result = adminController.ConfirmUser("adokuchaeva11@gmail.com").Result as JsonResult;
+            Assert.Equal(result.Value, true);
+        }
+
+        [Fact]
+        public void ConfirmInvalidEmail()
+        {
+            var result = adminController.ConfirmUser("adokua11@gmail.com").Result as JsonResult;
+            Assert.Equal(result.Value, false);
         }
     }
 }
