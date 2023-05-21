@@ -20,16 +20,12 @@ namespace WebApplication4.Models.Services
 
         public async Task<bool> UpdateUserInfo(UserInfo user, string email)
         {
-            //add method
-            await Task.Delay(0);
-            return true;
+            return await DatabaseWRK.UpdateUserInfoAsync(user, email);
         }
 
         public async Task<UserInfo> GetUserInfo(string email)
         {
-            //add method
-            await Task.Delay(0);
-            return new UserInfo();
+            return await DatabaseWRK.GetUserInfoAsync(email);
         }
 
         public async Task<List<Specialty>> GetAllSpecialties()
@@ -39,9 +35,7 @@ namespace WebApplication4.Models.Services
 
         public async Task<bool> UpdateUserSpecialties(UserSpecialties specialties, string email)
         {
-            //add method
-            await Task.Delay(0);
-            return true;
+            return await DatabaseWRK.UpdateUserSpecialtiesAsync(specialties, email);
         }
 
         public async Task<UserSpecialties> GetUserSpecialties(string email)
