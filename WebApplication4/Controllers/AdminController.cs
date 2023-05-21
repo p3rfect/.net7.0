@@ -15,7 +15,7 @@ namespace WebApplication4.Controllers
             _adminService = adminService;
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, trustee")]
         [HttpGet("/admin/allusers/get")]
         async public Task<IActionResult> GetAllUsers()
         {
@@ -23,7 +23,7 @@ namespace WebApplication4.Controllers
             return Json(result);
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, trustee")]
         [HttpGet("/admin/user/get")]
         async public Task<IActionResult> GetUser(string email)
         {
@@ -31,7 +31,7 @@ namespace WebApplication4.Controllers
             return Json(result);
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, trustee")]
         [HttpPost("/admin/user/update")]
         async public Task<IActionResult> UpdateUser(string email, UserInfo info, Exams exams, UserSpecialties specialties)
         {
@@ -52,6 +52,14 @@ namespace WebApplication4.Controllers
         async public Task<IActionResult> ConfirmUser(string email)
         {
             bool result = await _adminService.ConfirmUser(email);
+            return Json(result);
+        }
+
+        [Authorize(Roles = "trustee")]
+        [HttpPost("/admin/user/accept")]
+        async public Task<IActionResult> AcceptUser(string email)
+        {
+            bool result = await _adminService.AcceptUser(email);
             return Json(result);
         }
     }

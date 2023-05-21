@@ -7,5 +7,6 @@
         public string? Password { get; set; }
         public string? Role { get; set; }
         public bool Confirmed { get; set;} 
+        public bool Accepted { get; set;}
     }
 }

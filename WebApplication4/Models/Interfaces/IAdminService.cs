@@ -11,5 +11,7 @@
         Task<bool> DeleteUser(string email);
 
         Task<bool> ConfirmUser(string email);
+
+        Task<bool> AcceptUser(string email);
     }
 }

@@ -6,6 +6,13 @@ namespace WebApplication4.Models.Services
     {
         private IUserService _userService = new UserService();
 
+        public async Task<bool> AcceptUser(string email)
+        {
+            //add method
+            await Task.Delay(0);
+            return true;
+        }
+
         public async Task<bool> ConfirmUser(string email)
         {
             return await _userService.ConfirmEmail(email);
@@ -34,5 +41,7 @@ namespace WebApplication4.Models.Services
         {
             return (await _userService.UpdateUserInfo(info, email), await _userService.UpdateUserExams(exams, email), await _userService.UpdateUserSpecialties(specialties, email));
         }
+
+
     }
 }

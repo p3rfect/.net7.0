@@ -81,7 +81,8 @@ namespace WebApplication4.Controllers
                 Email = email,
                 Password = password,
                 Role = "user",
-                Confirmed = false
+                Confirmed = false,
+                Accepted = false
             };
             bool result = await _userService.AddNewUser(user);
             if (!result) return BadRequest(new { errorText = "User is already exist" });
@@ -112,6 +113,8 @@ namespace WebApplication4.Controllers
         [HttpPost("/user/info/update")]
         async public Task<IActionResult> UpdateUserInfo(UserInfo info, string email)
         {
+            var connUser = await _userService.GetUserByEmail(email);
+            if(connUser == null || connUser.Accepted==true) return BadRequest(new { errorText = "User is already accepted" });
             bool result = await _userService.UpdateUserInfo(info, email);
             return Ok(result);
         }
@@ -144,6 +147,8 @@ namespace WebApplication4.Controllers
         [HttpPost("/user/specialties/update")]
         async public Task<IActionResult> UpdateUserSpecialties(UserSpecialties specialties, string email)
         {
+            var connUser = await _userService.GetUserByEmail(email);
+            if (connUser == null || connUser.Accepted == true) return BadRequest(new { errorText = "User is already accepted" });
             bool result = await _userService.UpdateUserSpecialties(specialties, email);
             return Ok(result);
         }
@@ -152,6 +157,8 @@ namespace WebApplication4.Controllers
         [HttpPost("/user/exams/update")]
         async public Task<IActionResult> UpdateUserExams(Exams exams, string email)
         {
+            var connUser = await _userService.GetUserByEmail(email);
+            if (connUser == null || connUser.Accepted == true) return BadRequest(new { errorText = "User is already accepted" });
             bool result = await _userService.UpdateUserExams(exams, email);
             return Ok(result);
         }
