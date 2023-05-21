@@ -643,6 +643,92 @@
             await dataSource3.CloseAsync();
             return true;
         }
+
+         public static async Task<UserInfo> GetUserInfoAsync(string email)
+         {
+             await using var dataSource = new NpgsqlConnection(ConnectionString);
+             await dataSource.OpenAsync();
+             await using var findUser = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource)
+             {
+                 Parameters =
+                 {
+                     new("p1", email)
+                 }
+             };
+             await using var readUser = await findUser.ExecuteReaderAsync();
+             int userId = -1;
+             if (await readUser.ReadAsync())
+             {
+                 userId = readUser.GetInt32(0);
+             }
+
+             UserInfo ans = new UserInfo();
+             await findUser.DisposeAsync();
+             await readUser.DisposeAsync();
+             await using var findUserInfo = new NpgsqlCommand("SELECT * FROM userInfo WHERE user_id = @p1", dataSource)
+             {
+                 Parameters =
+                 {
+                     new("p1", email)
+                 }
+             };
+             await using var readUserInfo = await findUserInfo.ExecuteReaderAsync();
+             
+             if (await readUserInfo.ReadAsync())
+             {
+                 ans.Lastname = readUserInfo.GetString(1);
+                ans.LastnameLat = readUserInfo.GetString(2);
+                ans.Firstname = readUserInfo.GetString(3);
+                ans.Firstnamelat = readUserInfo.GetString(4);
+                ans.Surname = readUserInfo.GetString(5);
+                ans.Birthday = readUserInfo.GetString(6);
+                ans.IsMale = readUserInfo.GetBoolean(7);
+                ans.IsSingle = readUserInfo.GetBoolean(8);
+                ans.DocumentType = readUserInfo.GetString(9);
+                ans.IdentyNumber = readUserInfo.GetString(10);
+                ans.Series = readUserInfo.GetString(11);
+                ans.Number = readUserInfo.GetString(12);
+                ans.DateOfIssue = readUserInfo.GetString(13);
+                ans.Validity = readUserInfo.GetString(14);
+                ans.IssuedBy = readUserInfo.GetString(15);
+                ans.Education = readUserInfo.GetString(16);
+                ans.InstitutionType = readUserInfo.GetString(17);
+                ans.Document = readUserInfo.GetString(18);
+                ans.Institution = readUserInfo.GetString(19);
+                ans.DocumentNumber = readUserInfo.GetString(20);
+                ans.GraduationDate = readUserInfo.GetString(21);
+                ans.Language = readUserInfo.GetString(22);
+                ans.AverageScore = readUserInfo.GetInt32(23);
+                ans.PostalCode = readUserInfo.GetString(24);
+                ans.Country = readUserInfo.GetString(25);
+                ans.Region = readUserInfo.GetString(26);
+                ans.District = readUserInfo.GetString(27);
+                ans.LocalityType = readUserInfo.GetString(28);
+                ans.LocalityName = readUserInfo.GetString(29);
+                ans.StreetType = readUserInfo.GetString(30);
+                ans.Street = readUserInfo.GetString(31);
+                ans.HouseNumber = readUserInfo.GetString(32);
+                ans.HousingNumber = readUserInfo.GetString(33);
+                ans.FlatNumber = readUserInfo.GetString(34);
+                ans.PhoneNumber = readUserInfo.GetString(35);
+                ans.Benefits = readUserInfo.GetString(36);
+                ans.FatherType = readUserInfo.GetString(37);
+                ans.FatherLastname = readUserInfo.GetString(38);
+                ans.FatherFirstname = readUserInfo.GetString(39);
+                ans.FatherSurname = readUserInfo.GetString(40);
+                ans.FatherAddress = readUserInfo.GetString(41);
+                ans.MotherType = readUserInfo.GetString(42);
+                ans.MotherLastname = readUserInfo.GetString(43);
+                ans.MotherFirstname = readUserInfo.GetString(44);
+                ans.MotherSurname = readUserInfo.GetString(45);
+                ans.MotherAddress = readUserInfo.GetString(46);
+             }
+
+             await readUserInfo.DisposeAsync();
+             await findUserInfo.DisposeAsync();
+             await dataSource.CloseAsync();
+             return ans;
+         }
     }
 /*
 IsMale BOOLEAN,
