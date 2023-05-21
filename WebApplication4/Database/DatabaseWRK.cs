@@ -475,7 +475,7 @@
             return true;
         }
 
-        public static async Task<bool> GetUserInfoAsync(UserSpecialties specialties, string email)
+         public static async Task<bool> UpdateUserInfoAsync(UserInfo user, string email)
         {
             await using var dataSource = new NpgsqlConnection(ConnectionString);
             await using var dataSource2 = new NpgsqlConnection(ConnectionString);
@@ -507,7 +507,137 @@
 
             await readUser.DisposeAsync();
             await findUser.DisposeAsync();
-                
+
+            await using var findInfo = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource)
+            {
+                Parameters =
+                {
+                    new("p1", email)
+                }
+            };
+            await using var readInfo = await findInfo.ExecuteReaderAsync();
+
+            if (await readInfo.ReadAsync())
+            {
+//UPDATE userInfo SET Lastname = @p2, Lastnamelat = @p3, Firstname = @p4, Firstnamelat = @p5, surname = @p6, Birthday = @p7, IsMale = @p8, IsSingle = @p9, DocumentType = @p10, IdentyNumber = @p11, Series = @p12, Number = @p13, DateOfIssue = @p14, Validity = @p15, IssuedBy = @p16, Education = @p17, InstitutionType = @p18, Document = @p19, Institution = @p20, DocumentNumber = @p21, GraduationDate = @p22, Language = @p23, AverageScore = @p24, PostalCode = @p25, Country = @p26, Region = @p27, District = @p28, LocalityType = @p29, LocalityName = @p30, StreetType = @p31, Street = @p32, HouseNumber = @p33, HousingNumber = @p34, FlatNumber = @p35, PhoneNumber = @p36, Benefits = @p37, FatherType = @p38, FatherLastname = @p39, FatherFirstname = @p40, FatherSurname = @p41, FatherAddress = @p42, MotherType = @p43, MotherLastname = @p44, MotherFirstname = @p45, MotherSurname = @p46, MotherAddress = @p47 WHERE user_id = @p1
+                await using var insertUserInfo = new NpgsqlCommand(
+                    "UPDATE userInfo SET Lastname = @p2, Lastnamelat = @p3, Firstname = @p4, Firstnamelat = @p5, surname = @p6, Birthday = @p7, IsMale = @p8, IsSingle = @p9, DocumentType = @p10, IdentyNumber = @p11, Series = @p12, Number = @p13, DateOfIssue = @p14, Validity = @p15, IssuedBy = @p16, Education = @p17, InstitutionType = @p18, Document = @p19, Institution = @p20, DocumentNumber = @p21, GraduationDate = @p22, Language = @p23, AverageScore = @p24, PostalCode = @p25, Country = @p26, Region = @p27, District = @p28, LocalityType = @p29, LocalityName = @p30, StreetType = @p31, Street = @p32, HouseNumber = @p33, HousingNumber = @p34, FlatNumber = @p35, PhoneNumber = @p36, Benefits = @p37, FatherType = @p38, FatherLastname = @p39, FatherFirstname = @p40, FatherSurname = @p41, FatherAddress = @p42, MotherType = @p43, MotherLastname = @p44, MotherFirstname = @p45, MotherSurname = @p46, MotherAddress = @p47 WHERE user_id = @p1",
+                    dataSource3)
+                {
+                    Parameters =
+                    {
+                        new ("p1", userId),
+                        new ("p2", user.Lastname),
+                        new ("p3", user.LastnameLat),
+                        new ("p4", user.Firstname),
+                        new ("p5", user.Firstnamelat),
+                        new ("p6", user.Surname),
+                        new ("p7", user.Birthday),
+                        new ("p8", user.IsMale),
+                        new ("p9", user.IsSingle),
+                        new ("p10", user.DocumentType),
+                        new ("p11", user.IdentyNumber),
+                        new ("p12", user.Series),
+                        new ("p13", user.Number),
+                        new ("p14", user.DateOfIssue),
+                        new ("p15", user.Validity),
+                        new ("p16", user.IssuedBy),
+                        new ("p17", user.Education),
+                        new ("p18", user.InstitutionType),
+                        new ("p19", user.Document),
+                        new ("p20", user.Institution),
+                        new ("p21", user.DocumentNumber),
+                        new ("p22", user.GraduationDate),
+                        new ("p23", user.Language),
+                        new ("p24", user.AverageScore),
+                        new ("p25", user.PostalCode),
+                        new ("p26", user.Country),
+                        new ("p27", user.Region),
+                        new ("p28", user.District),
+                        new ("p29", user.LocalityType),
+                        new ("p30", user.LocalityName),
+                        new ("p31", user.StreetType),
+                        new ("p32", user.Street),
+                        new ("p33", user.HouseNumber),
+                        new ("p34", user.HousingNumber),
+                        new ("p35", user.FlatNumber),
+                        new ("p36", user.PhoneNumber),
+                        new ("p37", user.Benefits),
+                        new ("p38", user.FatherType),
+                        new ("p39", user.FatherLastname),
+                        new ("p40", user.FatherFirstname),
+                        new ("p41", user.FatherSurname),
+                        new ("p42", user.FatherAddress),
+                        new ("p43", user.MotherType),
+                        new ("p44", user.MotherLastname),
+                        new ("p45", user.MotherFirstname),
+                        new ("p46", user.MotherSurname),
+                        new ("p47", user.MotherAddress),
+                    }
+                };
+                await insertUserInfo.ExecuteNonQueryAsync();
+                await insertUserInfo.DisposeAsync();
+            }
+            else
+            {
+                await using var insertUserInfo = new NpgsqlCommand(
+                    "INSERT INTO userInfo(user_id, Lastname, Lastnamelat, Firstname, Firstnamelat, surname, Birthday, IsMale, IsSingle, DocumentType, IdentyNumber, Series, Number, DateOfIssue, Validity, IssuedBy, Education, InstitutionType, Document, Institution, DocumentNumber, GraduationDate, Language, AverageScore, PostalCode, Country, Region, District, LocalityType, LocalityName, StreetType, Street, HouseNumber, HousingNumber, FlatNumber, PhoneNumber, Benefits, FatherType, FatherLastname, FatherFirstname, FatherSurname, FatherAddress, MotherType, MotherLastname, MotherFirstname, MotherSurname, MotherAddress) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, @p40, @p41, @p42, @p43, @p44, @p45, @p46, @p47", dataSource3)
+                {
+                    Parameters =
+                    {
+                        new NpgsqlParameter("p1", userId),
+                        new NpgsqlParameter("p2", user.Lastname),
+                        new NpgsqlParameter("p3", user.LastnameLat),
+                        new NpgsqlParameter("p4", user.Firstname),
+                        new NpgsqlParameter("p5", user.Firstnamelat),
+                        new NpgsqlParameter("p6", user.Surname),
+                        new NpgsqlParameter("p7", user.Birthday),
+                        new NpgsqlParameter("p8", user.IsMale),
+                        new NpgsqlParameter("p9", user.IsSingle),
+                        new NpgsqlParameter("p10", user.DocumentType),
+                        new NpgsqlParameter("p11", user.IdentyNumber),
+                        new NpgsqlParameter("p12", user.Series),
+                        new NpgsqlParameter("p13", user.Number),
+                        new NpgsqlParameter("p14", user.DateOfIssue),
+                        new NpgsqlParameter("p15", user.Validity),
+                        new NpgsqlParameter("p16", user.IssuedBy),
+                        new NpgsqlParameter("p17", user.Education),
+                        new NpgsqlParameter("p18", user.InstitutionType),
+                        new NpgsqlParameter("p19", user.Document),
+                        new NpgsqlParameter("p20", user.Institution),
+                        new NpgsqlParameter("p21", user.DocumentNumber),
+                        new NpgsqlParameter("p22", user.GraduationDate),
+                        new NpgsqlParameter("p23", user.Language),
+                        new NpgsqlParameter("p24", user.AverageScore),
+                        new NpgsqlParameter("p25", user.PostalCode),
+                        new NpgsqlParameter("p26", user.Country),
+                        new NpgsqlParameter("p27", user.Region),
+                        new NpgsqlParameter("p28", user.District),
+                        new NpgsqlParameter("p29", user.LocalityType),
+                        new NpgsqlParameter("p30", user.LocalityName),
+                        new NpgsqlParameter("p31", user.StreetType),
+                        new NpgsqlParameter("p32", user.Street),
+                        new NpgsqlParameter("p33", user.HouseNumber),
+                        new NpgsqlParameter("p34", user.HousingNumber),
+                        new NpgsqlParameter("p35", user.FlatNumber),
+                        new NpgsqlParameter("p36", user.PhoneNumber),
+                        new NpgsqlParameter("p37", user.Benefits),
+                        new NpgsqlParameter("p38", user.FatherType),
+                        new NpgsqlParameter("p39", user.FatherLastname),
+                        new NpgsqlParameter("p40", user.FatherFirstname),
+                        new NpgsqlParameter("p41", user.FatherSurname),
+                        new NpgsqlParameter("p42", user.FatherAddress),
+                        new NpgsqlParameter("p43", user.MotherType),
+                        new NpgsqlParameter("p44", user.MotherLastname),
+                        new NpgsqlParameter("p45", user.MotherFirstname),
+                        new NpgsqlParameter("p46", user.MotherSurname),
+                        new NpgsqlParameter("p47", user.MotherAddress),
+                    }
+                };
+                await insertUserInfo.ExecuteNonQueryAsync();
+                await insertUserInfo.DisposeAsync();
+            }
+
             await dataSource.CloseAsync();
             await dataSource2.CloseAsync();
             await dataSource3.CloseAsync();
