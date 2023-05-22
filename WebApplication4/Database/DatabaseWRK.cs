@@ -729,6 +729,157 @@
              await dataSource.CloseAsync();
              return ans;
          }
+
+         public static async Task<List<string>> GetAllUsersEmails()
+         {
+             await using var dataSource = new NpgsqlConnection(ConnectionString);
+             await dataSource.OpenAsync();
+             await using var findUser = new NpgsqlCommand("SELECT * FROM users", dataSource);
+             List<string> ans = new List<string>();
+             await using var readUser = await findUser.ExecuteReaderAsync();
+             while (await readUser.ReadAsync())
+             {
+                 ans.Add(readUser.GetString(1));
+             }
+             await dataSource.CloseAsync();
+             return ans;
+         }
+         // public static async Task<(UserInfo, Exams, UserSpecialties)> GetUser(string email)
+         // {
+         //     return (await GetUserInfoAsync(email),await GetUserExamsAsync(email), await GetUserSpecialtiesAsync(email));
+         // }
+         public static async Task<bool> ConfirmUserAsync(string email){
+             await using var dataSource = new NpgsqlConnection(ConnectionString);
+             await dataSource.OpenAsync();
+             await using var editUser = new NpgsqlCommand(
+                 "UPDATE users SET Confirm = @p2 WHERE login = @p1", dataSource)
+             {
+                 Parameters =
+                 {
+                     new("p1", email),
+                     new("p2", true),
+                 }
+             };
+             await editUser.ExecuteNonQueryAsync();
+             await editUser.DisposeAsync();
+             await dataSource.CloseAsync(); 
+             return true;
+         }
+         public static async Task<bool> AcceptUserAsync(string email){
+             await using var dataSource = new NpgsqlConnection(ConnectionString);
+             await dataSource.OpenAsync();
+             await using var editUser = new NpgsqlCommand(
+                 "UPDATE users SET Accept = @p2 WHERE login = @p1", dataSource)
+             {
+                 Parameters =
+                 {
+                     new("p1", email),
+                     new("p2", true),
+                 }
+             };
+             await editUser.ExecuteNonQueryAsync();
+             await editUser.DisposeAsync();
+             await dataSource.CloseAsync(); 
+             return true;
+         }
+         public static async Task<bool> DeleteUserAsync(string email){
+             await using var dataSource = new NpgsqlConnection(ConnectionString);
+             await dataSource.OpenAsync();
+             
+             await using var findUser = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource)
+             {
+                 Parameters =
+                 {
+                     new("p1", email)
+                 }
+             };
+             await using var readUser = await findUser.ExecuteReaderAsync();
+             int userId = -1;
+             if (await readUser.ReadAsync())
+             {
+                 userId = readUser.GetInt32(0);
+             }
+             
+             using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
+             {
+                 await connection.OpenAsync();
+
+                 string deleteQuery = "DELETE FROM users WHERE id = @userId";
+                 using (NpgsqlCommand command = new NpgsqlCommand(deleteQuery, connection))
+                 {
+                     command.Parameters.AddWithValue("@userId", userId);
+
+                     int rowsAffected = 0;
+                     do
+                     {
+                         rowsAffected = await command.ExecuteNonQueryAsync();
+                     }
+                     while (rowsAffected > 0);
+                 }
+
+                 connection.Close();
+             }
+             using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
+             {
+                 await connection.OpenAsync();
+
+                 string deleteQuery = "DELETE FROM user_specialities WHERE user_id = @userId";
+                 using (NpgsqlCommand command = new NpgsqlCommand(deleteQuery, connection))
+                 {
+                     command.Parameters.AddWithValue("@userId", userId);
+
+                     int rowsAffected = 0;
+                     do
+                     {
+                         rowsAffected = await command.ExecuteNonQueryAsync();
+                     }
+                     while (rowsAffected > 0);
+                 }
+
+                 connection.Close();
+             }
+             using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
+             {
+                 await connection.OpenAsync();
+
+                 string deleteQuery = "DELETE FROM exams WHERE user_id = @userId";
+                 using (NpgsqlCommand command = new NpgsqlCommand(deleteQuery, connection))
+                 {
+                     command.Parameters.AddWithValue("@userId", userId);
+
+                     int rowsAffected = 0;
+                     do
+                     {
+                         rowsAffected = await command.ExecuteNonQueryAsync();
+                     }
+                     while (rowsAffected > 0);
+                 }
+
+                 connection.Close();
+             }
+             using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
+             {
+                 await connection.OpenAsync();
+
+                 string deleteQuery = "DELETE FROM userInfo WHERE user_id = @userId";
+                 using (NpgsqlCommand command = new NpgsqlCommand(deleteQuery, connection))
+                 {
+                     command.Parameters.AddWithValue("@userId", userId);
+
+                     int rowsAffected = 0;
+                     do
+                     {
+                         rowsAffected = await command.ExecuteNonQueryAsync();
+                     }
+                     while (rowsAffected > 0);
+                 }
+
+                 connection.Close();
+             }
+             
+             await dataSource.CloseAsync(); 
+             return true;
+         }
     }
 /*
 IsMale BOOLEAN,
