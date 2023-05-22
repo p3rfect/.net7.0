@@ -730,7 +730,7 @@
              return ans;
          }
 
-         public static async Task<List<string>> GetAllUsersEmails()
+         public static async Task<List<string>> GetAllUsersEmailsAsync()
          {
              await using var dataSource = new NpgsqlConnection(ConnectionString);
              await dataSource.OpenAsync();
