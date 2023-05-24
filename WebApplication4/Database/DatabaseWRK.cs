@@ -81,9 +81,9 @@
             return true;
         }
 
-        public static async Task<List<UserSpecialties>> GetUserSpecialtiesAsync(string email)
+        public static async Task<UserSpecialties> GetUserSpecialtiesAsync(string email)
         {
-            var ans = new List<UserSpecialties>();
+            var ans = new UserSpecialties();
             await using var dataSource = new NpgsqlConnection(ConnectionString);
             await dataSource.OpenAsync();
 
@@ -100,16 +100,14 @@
             await readUser.DisposeAsync();
             await findUser.DisposeAsync();
             
-            await using var findUserSpecialities  = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource);
-            findUserSpecialities.Parameters.AddWithValue("@p1", email);
+            await using var findUserSpecialities  = new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1", dataSource);
+            findUserSpecialities.Parameters.AddWithValue("@p1", userId);
             await using var readUserSpecialities = await findUserSpecialities.ExecuteReaderAsync();
 
             while (await readUserSpecialities.ReadAsync())
             {
-                UserSpecialties userSpecialtie = new UserSpecialties();
-                userSpecialtie.SpecialtiesCodes.Add(readUserSpecialities.GetString(4));
-                userSpecialtie.FinancingFormPeriod = readUserSpecialities.GetString(5);
-                ans.Add(userSpecialtie);
+                ans.SpecialtiesCodes.Add(readUserSpecialities.GetString(4));
+                ans.FinancingFormPeriod = readUserSpecialities.GetString(5);
             }
 
             await findUserSpecialities.DisposeAsync();
