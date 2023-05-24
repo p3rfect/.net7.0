@@ -36,6 +36,10 @@ namespace WebApplication4.Models.Services
         {
             return (await _userService.UpdateUserInfo(info, email), await _userService.UpdateUserExams(exams, email), await _userService.UpdateUserSpecialties(specialties, email));
         }
+        public async Task<bool> Enroll()
+        {
+            return await Enrollment.EnrollmentUsers();
+        }
 
 
     }

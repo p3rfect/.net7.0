@@ -65,5 +65,13 @@ namespace WebApplication4.Controllers
             bool result = await _adminService.AcceptUser(email);
             return Json(result);
         }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost("/admin/enroll")]
+        async public Task<IActionResult> Enroll()
+        {
+            bool result = await _adminService.Enroll();
+            return Json(result);
+        }
     }
 }
