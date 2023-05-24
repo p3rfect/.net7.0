@@ -495,16 +495,8 @@
             if (await readUser.ReadAsync())
             {
                 userId = readUser.GetInt32(0);
-            }
-            else
-            {
-                await dataSource.CloseAsync();
-                await dataSource2.CloseAsync();
-                await dataSource3.CloseAsync();
-                await readUser.DisposeAsync();
-                return false;
-            }
-
+            } 
+            
             await readUser.DisposeAsync();
             await findUser.DisposeAsync();
 
@@ -669,13 +661,14 @@
              {
                  Parameters =
                  {
-                     new("p1", email)
+                     new("p1", userId)
                  }
              };
              await using var readUserInfo = await findUserInfo.ExecuteReaderAsync();
              
              if (await readUserInfo.ReadAsync())
              {
+                 Console.WriteLine("123");
                  ans.Lastname = readUserInfo.GetString(1);
                 ans.LastnameLat = readUserInfo.GetString(2);
                 ans.Firstname = readUserInfo.GetString(3);
