@@ -27,14 +27,19 @@ namespace WebApplication4.Models.Services
             return await DatabaseWRK.GetAllUsersEmailsAsync();
         }
 
-        public async Task<(UserInfo, Exams, UserSpecialties)> GetUser(string email)
+        public async Task<Tuple<UserInfo, Exams, UserSpecialties>> GetUser(string email)
         {
-            return (await _userService.GetUserInfo(email), await _userService.GetUserExams(email), await _userService.GetUserSpecialties(email));
+            return Tuple.Create(await _userService.GetUserInfo(email), await _userService.GetUserExams(email), await _userService.GetUserSpecialties(email));
         }
 
-        public async Task<(bool, bool, bool)> UpdateUser(string email, UserInfo info, Exams exams, UserSpecialties specialties)
+        public async Task<List<bool>> UpdateUser(string email, UserInfo info, Exams exams, UserSpecialties specialties)
         {
-            return (await _userService.UpdateUserInfo(info, email), await _userService.UpdateUserExams(exams, email), await _userService.UpdateUserSpecialties(specialties, email));
+            return new List<bool>()
+            { 
+                await _userService.UpdateUserInfo(info, email), 
+                await _userService.UpdateUserExams(exams, email),
+                await _userService.UpdateUserSpecialties(specialties, email) 
+            };
         }
         public async Task<bool> Enroll()
         {
