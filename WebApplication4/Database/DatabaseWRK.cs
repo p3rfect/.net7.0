@@ -647,7 +647,7 @@
                 ans.DocumentNumber = readUserInfo.GetString(20);
                 ans.GraduationDate = readUserInfo.GetString(21);
                 ans.Language = readUserInfo.GetString(22);
-                ans.AverageScore = readUserInfo.GetInt32(23);
+                ans.AverageScore = readUserInfo.GetDouble(23);
                 ans.PostalCode = readUserInfo.GetString(24);
                 ans.Country = readUserInfo.GetString(25);
                 ans.Region = readUserInfo.GetString(26);
@@ -826,45 +826,4 @@
              return true;
          }
     }
-/*
-IsMale BOOLEAN,
-IsSingle BOOLEAN,
-DocumentType VARCHAR(255),
-IdentyNumber VARCHAR(255),
-Series VARCHAR(255),
-Number VARCHAR(255),
-DateOfIssue VARCHAR(255),
-Validity VARCHAR(255),
-IssuedBy VARCHAR(255),
-Education VARCHAR(255),
-InstitutionType VARCHAR(255),
-Document VARCHAR(255),
-Institution VARCHAR(255),
-DocumentNumber VARCHAR(255),
-GraduationDate VARCHAR(255),
-Language VARCHAR(255),
-AverageScore INTEGER,
-PostalCode
-Country
-Region
-District
-LocalityType
-LocalityName
-StreetType
-Street
-HouseNumber
-HousingNumber
-FlatNumber
-PhoneNumber
-Benefits
-FatherType
-FatherLastname
-FatherFirstname
-FatherSurname
-FatherAddress
-MotherType
-MotherLastname
-MotherFirstname
-MotherSurname
-MotherAddress
-*/
+    
