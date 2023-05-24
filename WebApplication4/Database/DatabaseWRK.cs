@@ -85,9 +85,7 @@
         {
             var ans = new List<UserSpecialties>();
             await using var dataSource = new NpgsqlConnection(ConnectionString);
-            await using var dataSource2 = new NpgsqlConnection(ConnectionString);
             await dataSource.OpenAsync();
-            await dataSource2.OpenAsync();
 
             await using var findUser = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource);
             findUser.Parameters.AddWithValue("@p1", email);
@@ -109,10 +107,14 @@
             while (await readUserSpecialities.ReadAsync())
             {
                 UserSpecialties userSpecialtie = new UserSpecialties();
-                
-                
+                userSpecialtie.SpecialtiesCodes.Add(readUserSpecialities.GetString(4));
+                userSpecialtie.FinancingFormPeriod = readUserSpecialities.GetString(5);
+                ans.Add(userSpecialtie);
             }
-            
+
+            await findUserSpecialities.DisposeAsync();
+            await readUserSpecialities.DisposeAsync();
+            await dataSource.CloseAsync();
             return ans;
         }
         public static async Task<List<Specialty>> GetAllSpecialtiesAsync()
@@ -385,7 +387,7 @@
                 if (await readUserSpecialities.ReadAsync())
                 {
                     await using var editUserSpecialities = new NpgsqlCommand(
-                        "UPDATE exams SET priority = @p3, user_points = @p4, code = @p5 WHERE user_id = @p1 AND speciality_id = @p2",
+                        "UPDATE exams SET priority = @p3, user_points = @p4, code = @p5, FinancingFormPeriod = @p6 WHERE user_id = @p1 AND speciality_id = @p2",
                         dataSource3)
                     {
                         Parameters =
@@ -394,7 +396,8 @@
                             new("p2", specialitiesId),
                             new("p3", i),
                             new("p4", points),
-                            new ("p5",specialties.SpecialtiesCodes[i])
+                            new ("p5",specialties.SpecialtiesCodes[i]),
+                            new ("p6",specialties.FinancingFormPeriod)
                         }
                     };
                     await editUserSpecialities.ExecuteNonQueryAsync();
@@ -403,7 +406,7 @@
                 else
                 {
                     await using var insertUserSpecialities = new NpgsqlCommand(
-                        "INSERT INTO user_specialities(user_id, priority, speciality_id, user_points, code) VALUES (@p1, @p2, @p3, @p4, @p5)",
+                        "INSERT INTO user_specialities(user_id, priority, speciality_id, user_points, code, FinancingFormPeriod) VALUES (@p1, @p2, @p3, @p4, @p5, @p6)",
                         dataSource3)
                     {
                         Parameters =
@@ -412,7 +415,8 @@
                             new NpgsqlParameter("p2", i),
                             new NpgsqlParameter("p3", specialitiesId),
                             new NpgsqlParameter("p4", points),
-                            new NpgsqlParameter("p5",specialties.SpecialtiesCodes[i])
+                            new NpgsqlParameter("p5",specialties.SpecialtiesCodes[i]),
+                            new NpgsqlParameter("p6",specialties.FinancingFormPeriod)
                         }
                     };
                     await insertUserSpecialities.ExecuteNonQueryAsync();
