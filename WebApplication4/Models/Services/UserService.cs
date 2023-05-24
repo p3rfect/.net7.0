@@ -57,10 +57,7 @@ namespace WebApplication4.Models.Services
 
         public async Task<bool> ConfirmEmail(string email)
         {
-
-            //add method
-            await Task.Delay(0);
-            return true;
+            return await DatabaseWRK.ConfirmUserAsync(email);
         }
     }
 }

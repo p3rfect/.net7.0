@@ -1,4 +1,5 @@
-﻿using WebApplication4.Models.Interfaces;
+﻿using WebApplication4.Database;
+using WebApplication4.Models.Interfaces;
 
 namespace WebApplication4.Models.Services
 {
@@ -8,9 +9,7 @@ namespace WebApplication4.Models.Services
 
         public async Task<bool> AcceptUser(string email)
         {
-            //add method
-            await Task.Delay(0);
-            return true;
+            return await DatabaseWRK.AcceptUserAsync(email);
         }
 
         public async Task<bool> ConfirmUser(string email)
@@ -20,16 +19,12 @@ namespace WebApplication4.Models.Services
 
         public async Task<bool> DeleteUser(string email)
         {
-            //add method
-            await Task.Delay(0);
-            return true;
+            return await DatabaseWRK.DeleteUserAsync(email);
         }
 
         public async Task<List<string>> GetAllUsersEmails()
         {
-            //add method
-            await Task.Delay(0);
-            return new List<string>();
+            return await DatabaseWRK.GetAllUsersEmailsAsync();
         }
 
         public async Task<(UserInfo, Exams, UserSpecialties)> GetUser(string email)
