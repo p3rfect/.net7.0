@@ -40,9 +40,7 @@ namespace WebApplication4.Models.Services
 
         public async Task<UserSpecialties> GetUserSpecialties(string email)
         {
-            //return await DatabaseWRK.GetUserSpecialtiesAsync(email);
-            await Task.Delay(0);
-            return new UserSpecialties();
+            return await DatabaseWRK.GetUserSpecialtiesAsync(email);
         }
 
         public async Task<bool> UpdateUserExams(Exams exams, string email)
