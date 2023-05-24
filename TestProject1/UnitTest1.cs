@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Text.Json;
 using WebApplication4.Controllers;
@@ -86,14 +85,14 @@ namespace TestProject1
         [Fact]
         public void UpdateValidUserInfo()
         {
-            var result = accountController.UpdateUserInfo(new UserInfo(),"adokuchaeva11@gmail.com").Result as JsonResult;
+            var result = accountController.UpdateUserInfo(JsonSerializer.Serialize(new UserInfo()),"adokuchaeva11@gmail.com").Result as JsonResult;
             Assert.True(result is OkObjectResult);
         }
 
         [Fact]
         public void UpdateInvalidUserInfo()
         {
-            var result = accountController.UpdateUserInfo(new UserInfo(), "adokua11@gmail.com").Result as JsonResult;
+            var result = accountController.UpdateUserInfo(JsonSerializer.Serialize(new UserInfo()), "adokua11@gmail.com").Result as JsonResult;
             Assert.True(result is BadRequestObjectResult);
         }
 
@@ -114,14 +113,14 @@ namespace TestProject1
         [Fact]
         public void UpdateValidUserSpecialties()
         {
-            var result = accountController.UpdateUserSpecialties(new UserSpecialties(), "adokuchaeva11@gmail.com").Result as JsonResult;
+            var result = accountController.UpdateUserSpecialties(JsonSerializer.Serialize(new UserSpecialties()), "adokuchaeva11@gmail.com").Result as JsonResult;
             Assert.True(result is OkObjectResult);
         }
 
         [Fact]
         public void UpdateInvalidUserSpecialties()
         {
-            var result = accountController.UpdateUserSpecialties(new UserSpecialties(), "adokua11@gmail.com").Result as JsonResult;
+            var result = accountController.UpdateUserSpecialties(JsonSerializer.Serialize(new UserSpecialties()), "adokua11@gmail.com").Result as JsonResult;
             Assert.True(result is BadRequestObjectResult);
         }
 
@@ -142,14 +141,14 @@ namespace TestProject1
         [Fact]
         public void UpdateValidUserExams()
         {
-            var result = accountController.UpdateUserExams(new Exams(), "adokuchaeva11@gmail.com").Result as JsonResult;
+            var result = accountController.UpdateUserExams(JsonSerializer.Serialize(new Exams()), "adokuchaeva11@gmail.com").Result as JsonResult;
             Assert.True(result is OkObjectResult);
         }
 
         [Fact]
         public void UpdateInvalidUserExams()
         {
-            var result = accountController.UpdateUserExams(new Exams(), "adokua11@gmail.com").Result as JsonResult;
+            var result = accountController.UpdateUserExams(JsonSerializer.Serialize(new Exams()), "adokua11@gmail.com").Result as JsonResult;
             Assert.True(result is BadRequestObjectResult);
         }
 
@@ -199,14 +198,14 @@ namespace TestProject1
         [Fact]
         public void UpdateValidUser()
         {
-            var result = adminController.UpdateUser("adokuchaeva11@gmail.com", new UserInfo(), new Exams(), new UserSpecialties()).Result as JsonResult;
+            var result = adminController.UpdateUser("adokuchaeva11@gmail.com", JsonSerializer.Serialize(new UserInfo()), JsonSerializer.Serialize(new Exams()), JsonSerializer.Serialize(new UserSpecialties())).Result as JsonResult;
             Assert.Equal(result.Value, (true, true, true));
         }
 
         [Fact]
         public void UpdateInvalidUser()
         {
-            var result = adminController.UpdateUser("adokua11@gmail.com", new UserInfo(), new Exams(), new UserSpecialties()).Result as JsonResult;
+            var result = adminController.UpdateUser("adokua11@gmail.com", JsonSerializer.Serialize(new UserInfo()), JsonSerializer.Serialize(new Exams()), JsonSerializer.Serialize(new UserSpecialties())).Result as JsonResult;
             Assert.NotEqual(result.Value, (true, true, true));
         }
 

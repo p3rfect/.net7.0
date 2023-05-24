@@ -104,17 +104,18 @@ namespace WebApplication4.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<bool> ConfirmEmail(string email) 
+        public async Task<bool> ConfirmEmail(string email)
         {
             return await _userService.ConfirmEmail(email);
         }
 
         [Authorize]
         [HttpPost("/user/info/update")]
-        async public Task<IActionResult> UpdateUserInfo(UserInfo info, string email)
+        async public Task<IActionResult> UpdateUserInfo(string userinfo, string email)
         {
+            UserInfo info = JsonSerializer.Deserialize<UserInfo>(userinfo);
             var connUser = await _userService.GetUserByEmail(email);
-            if(connUser == null || connUser.Accepted==true) return BadRequest(new { errorText = "User is already accepted" });
+            if (connUser == null || connUser.Accepted == true) return BadRequest(new { errorText = "User is already accepted" });
             bool result = await _userService.UpdateUserInfo(info, email);
             return Ok(result);
         }
@@ -145,8 +146,9 @@ namespace WebApplication4.Controllers
 
         [Authorize]
         [HttpPost("/user/specialties/update")]
-        async public Task<IActionResult> UpdateUserSpecialties(UserSpecialties specialties, string email)
+        async public Task<IActionResult> UpdateUserSpecialties(string userspecialties, string email)
         {
+            UserSpecialties specialties = JsonSerializer.Deserialize<UserSpecialties>(userspecialties);
             var connUser = await _userService.GetUserByEmail(email);
             if (connUser == null || connUser.Accepted == true) return BadRequest(new { errorText = "User is already accepted" });
             bool result = await _userService.UpdateUserSpecialties(specialties, email);
@@ -155,8 +157,9 @@ namespace WebApplication4.Controllers
 
         [Authorize]
         [HttpPost("/user/exams/update")]
-        async public Task<IActionResult> UpdateUserExams(Exams exams, string email)
+        async public Task<IActionResult> UpdateUserExams(string userexams, string email)
         {
+            Exams exams = JsonSerializer.Deserialize<Exams>(userexams);
             var connUser = await _userService.GetUserByEmail(email);
             if (connUser == null || connUser.Accepted == true) return BadRequest(new { errorText = "User is already accepted" });
             bool result = await _userService.UpdateUserExams(exams, email);
