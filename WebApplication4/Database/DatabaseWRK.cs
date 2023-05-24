@@ -330,7 +330,7 @@
 
             for (int i = 0; i < specialties.SpecialtiesCodes.Count; i++)
             {
-                await using var findSpecialities  = new NpgsqlCommand("SELECT * FROM specialities WHERE code = @p1", dataSource2)
+                await using var findSpecialities  = new NpgsqlCommand("SELECT * FROM speciality  WHERE code = @p1", dataSource2)
                 {
                     Parameters =
                     {
