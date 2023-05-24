@@ -13,7 +13,5 @@
         Task<bool> ConfirmUser(string email);
 
         Task<bool> AcceptUser(string email);
-
-        Task<bool> Enroll();
     }
 }
