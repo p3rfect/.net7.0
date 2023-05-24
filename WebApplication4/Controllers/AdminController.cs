@@ -67,7 +67,7 @@ namespace WebApplication4.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [HttpPost("/admin/enroll")]
+        [HttpGet("/admin/enroll")]
         async public Task<IActionResult> Enroll()
         {
             bool result = await _adminService.Enroll();
