@@ -330,7 +330,7 @@
 
             for (int i = 0; i < specialties.SpecialtiesCodes.Count; i++)
             {
-                await using var findSpecialities  = new NpgsqlCommand("SELECT * FROM speciality  WHERE code = @p1", dataSource2)
+                await using var findSpecialities  = new NpgsqlCommand("SELECT * FROM speciality WHERE code = @p1", dataSource2)
                 {
                     Parameters =
                     {
@@ -378,7 +378,7 @@
                 if (await readUserSpecialities.ReadAsync())
                 {
                     await using var editUserSpecialities = new NpgsqlCommand(
-                        "UPDATE exams SET priority = @p3, user_points = @p4, code = @p5, FinancingFormPeriod = @p6 WHERE user_id = @p1 AND speciality_id = @p2",
+                        "UPDATE user_specialities SET priority = @p3, user_points = @p4, code = @p5, FinancingFormPeriod = @p6 WHERE user_id = @p1 AND speciality_id = @p2",
                         dataSource3)
                     {
                         Parameters =
