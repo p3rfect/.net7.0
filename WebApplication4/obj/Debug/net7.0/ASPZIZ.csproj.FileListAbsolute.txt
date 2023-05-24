@@ -40,7 +40,6 @@ C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\obj\Debug\
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\obj\Debug\net7.0\ASPZIZ.pdb
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\obj\Debug\net7.0\ASPZIZ.genruntimeconfig.cache
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\obj\Debug\net7.0\ref\ASPZIZ.dll
-D:\12\ASPZIZ\WebApplication4\bin\Debug\net7.0\appsettings.Development.json
 D:\12\ASPZIZ\WebApplication4\bin\Debug\net7.0\appsettings.json
 D:\12\ASPZIZ\WebApplication4\bin\Debug\net7.0\ASPZIZ.staticwebassets.runtime.json
 D:\12\ASPZIZ\WebApplication4\bin\Debug\net7.0\ASPZIZ.exe

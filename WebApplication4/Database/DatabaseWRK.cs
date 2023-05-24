@@ -304,6 +304,7 @@
             return true;
         }
         public static async Task<bool> UpdateUserSpecialtiesAsync(UserSpecialties specialties, string email){
+            Console.WriteLine("13");
             await using var dataSource = new NpgsqlConnection(ConnectionString);
             await using var dataSource2 = new NpgsqlConnection(ConnectionString);
             await using var dataSource3 = new NpgsqlConnection(ConnectionString);
@@ -322,14 +323,6 @@
             if (await readUser.ReadAsync())
             {
                 userId = readUser.GetInt32(0);
-            }
-            else
-            {
-                await dataSource.CloseAsync();
-                await dataSource2.CloseAsync();
-                await dataSource3.CloseAsync();
-                await readUser.DisposeAsync();
-                return false;
             }
 
             await readUser.DisposeAsync();
