@@ -81,9 +81,9 @@
             return true;
         }
 
-        public static async Task<List<UserSpecialties>> GetUserSpecialtiesAsync(string email)
+        public static async Task<UserSpecialties> GetUserSpecialtiesAsync(string email)
         {
-            var ans = new List<UserSpecialties>();
+            var ans = new UserSpecialties();
             await using var dataSource = new NpgsqlConnection(ConnectionString);
             await dataSource.OpenAsync();
 
@@ -100,16 +100,14 @@
             await readUser.DisposeAsync();
             await findUser.DisposeAsync();
             
-            await using var findUserSpecialities  = new NpgsqlCommand("SELECT * FROM users WHERE login = @p1", dataSource);
-            findUserSpecialities.Parameters.AddWithValue("@p1", email);
+            await using var findUserSpecialities  = new NpgsqlCommand("SELECT * FROM user_specialities WHERE user_id = @p1", dataSource);
+            findUserSpecialities.Parameters.AddWithValue("@p1", userId);
             await using var readUserSpecialities = await findUserSpecialities.ExecuteReaderAsync();
 
             while (await readUserSpecialities.ReadAsync())
             {
-                UserSpecialties userSpecialtie = new UserSpecialties();
-                userSpecialtie.SpecialtiesCodes.Add(readUserSpecialities.GetString(4));
-                userSpecialtie.FinancingFormPeriod = readUserSpecialities.GetString(5);
-                ans.Add(userSpecialtie);
+                ans.SpecialtiesCodes.Add(readUserSpecialities.GetString(4));
+                ans.FinancingFormPeriod = readUserSpecialities.GetString(5);
             }
 
             await findUserSpecialities.DisposeAsync();
@@ -647,7 +645,7 @@
                 ans.DocumentNumber = readUserInfo.GetString(20);
                 ans.GraduationDate = readUserInfo.GetString(21);
                 ans.Language = readUserInfo.GetString(22);
-                ans.AverageScore = readUserInfo.GetInt32(23);
+                ans.AverageScore = readUserInfo.GetDouble(23);
                 ans.PostalCode = readUserInfo.GetString(24);
                 ans.Country = readUserInfo.GetString(25);
                 ans.Region = readUserInfo.GetString(26);
@@ -826,45 +824,4 @@
              return true;
          }
     }
-/*
-IsMale BOOLEAN,
-IsSingle BOOLEAN,
-DocumentType VARCHAR(255),
-IdentyNumber VARCHAR(255),
-Series VARCHAR(255),
-Number VARCHAR(255),
-DateOfIssue VARCHAR(255),
-Validity VARCHAR(255),
-IssuedBy VARCHAR(255),
-Education VARCHAR(255),
-InstitutionType VARCHAR(255),
-Document VARCHAR(255),
-Institution VARCHAR(255),
-DocumentNumber VARCHAR(255),
-GraduationDate VARCHAR(255),
-Language VARCHAR(255),
-AverageScore INTEGER,
-PostalCode
-Country
-Region
-District
-LocalityType
-LocalityName
-StreetType
-Street
-HouseNumber
-HousingNumber
-FlatNumber
-PhoneNumber
-Benefits
-FatherType
-FatherLastname
-FatherFirstname
-FatherSurname
-FatherAddress
-MotherType
-MotherLastname
-MotherFirstname
-MotherSurname
-MotherAddress
-*/
+    
