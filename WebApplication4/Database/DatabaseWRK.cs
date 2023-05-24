@@ -478,7 +478,7 @@
                         new ("p2", user.Lastname),
                         new ("p3", user.LastnameLat),
                         new ("p4", user.Firstname),
-                        new ("p5", user.Firstnamelat),
+                        new ("p5", user.FirstnameLat),
                         new ("p6", user.Surname),
                         new ("p7", user.Birthday),
                         new ("p8", user.IsMale),
@@ -538,7 +538,7 @@
                         new ("p2", user.Lastname),
                         new ("p3", user.LastnameLat),
                         new ("p4", user.Firstname),
-                        new ("p5", user.Firstnamelat),
+                        new ("p5", user.FirstnameLat),
                         new ("p6", user.Surname),
                         new ("p7", user.Birthday),
                         new ("p8", user.IsMale),
@@ -628,7 +628,7 @@
                  ans.Lastname = readUserInfo.GetString(1);
                 ans.LastnameLat = readUserInfo.GetString(2);
                 ans.Firstname = readUserInfo.GetString(3);
-                ans.Firstnamelat = readUserInfo.GetString(4);
+                ans.FirstnameLat = readUserInfo.GetString(4);
                 ans.Surname = readUserInfo.GetString(5);
                 ans.Birthday = readUserInfo.GetString(6);
                 ans.IsMale = readUserInfo.GetBoolean(7);

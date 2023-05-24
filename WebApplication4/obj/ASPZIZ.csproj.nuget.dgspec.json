@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj": {}
+    "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj": {}
   },
   "projects": {
-    "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj": {
+    "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj",
+        "projectUniqueName": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj",
         "projectName": "ASPZIZ",
-        "projectPath": "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj",
-        "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
-        "outputPath": "D:\\12\\ASPZIZ\\WebApplication4\\obj\\",
+        "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj",
+        "packagesPath": "C:\\Users\\adoku\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\adoku\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -23,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

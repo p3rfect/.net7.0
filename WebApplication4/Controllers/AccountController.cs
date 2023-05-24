@@ -174,6 +174,13 @@ namespace WebApplication4.Controllers
             return Json(result);
         }
 
+        [HttpGet("/role/get")]
+        async public Task<IActionResult> GetRole(string email)
+        {
+            var user=await _userService.GetUserByEmail(email);
+            return Json(user.Role);
+        }
+
         [Route("/")]
         public IActionResult Index()
         {

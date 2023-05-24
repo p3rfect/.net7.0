@@ -8,7 +8,7 @@ namespace WebApplication4.Models
         public string Lastname { get; set; } = "";
         public string LastnameLat { get; set; } = "";
         public string Firstname { get; set; } = "";
-        public string Firstnamelat { get; set; } = "";
+        public string FirstnameLat { get; set; } = "";
         public string Surname { get; set; } = "";
         public string Birthday { get; set; } = "";
         public bool IsMale { get; set; } = true;
