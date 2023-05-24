@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\TestProject1\\TestProject1.csproj": {}
+    "D:\\12\\ASPZIZ\\TestProject1\\TestProject1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\TestProject1\\TestProject1.csproj": {
+    "D:\\12\\ASPZIZ\\TestProject1\\TestProject1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\TestProject1\\TestProject1.csproj",
+        "projectUniqueName": "D:\\12\\ASPZIZ\\TestProject1\\TestProject1.csproj",
         "projectName": "TestProject1",
-        "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\TestProject1\\TestProject1.csproj",
-        "packagesPath": "C:\\Users\\adoku\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\TestProject1\\obj\\",
+        "projectPath": "D:\\12\\ASPZIZ\\TestProject1\\TestProject1.csproj",
+        "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
+        "outputPath": "D:\\12\\ASPZIZ\\TestProject1\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\adoku\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +23,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj": {
-                "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj"
+              "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj": {
+                "projectPath": "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj"
               }
             }
           }
@@ -89,20 +87,17 @@
         }
       }
     },
-    "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj": {
+    "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj",
+        "projectUniqueName": "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj",
         "projectName": "ASPZIZ",
-        "projectPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\ASPZIZ.csproj",
-        "packagesPath": "C:\\Users\\adoku\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adoku\\source\\repos\\anastasiadok\\main\\.net7.0\\WebApplication4\\obj\\",
+        "projectPath": "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj",
+        "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
+        "outputPath": "D:\\12\\ASPZIZ\\WebApplication4\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\adoku\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -111,6 +106,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
