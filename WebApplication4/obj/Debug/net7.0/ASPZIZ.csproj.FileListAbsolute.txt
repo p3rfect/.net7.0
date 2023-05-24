@@ -1,4 +1,3 @@
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\appsettings.json
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\ASPZIZ.staticwebassets.runtime.json
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\WebApplication4\bin\Debug\net7.0\ASPZIZ.exe

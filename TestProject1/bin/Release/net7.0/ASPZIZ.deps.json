@@ -6,14 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "WebApplication4/1.0.0": {
+      "ASPZIZ/1.0.0": {
         "dependencies": {
           "MailKit": "3.6.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.3",
           "Npgsql": "8.0.0-preview.1"
         },
         "runtime": {
-          "WebApplication4.dll": {}
+          "ASPZIZ.dll": {}
         }
       },
       "MailKit/3.6.0": {
@@ -157,7 +157,7 @@
     }
   },
   "libraries": {
-    "WebApplication4/1.0.0": {
+    "ASPZIZ/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

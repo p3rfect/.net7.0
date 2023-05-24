@@ -27,7 +27,7 @@ namespace WebApplication4.Models
         public string DocumentNumber { get; set; } = "";
         public string GraduationDate { get; set; } = "";
         public string Language { get; set; } = "";
-        public int AverageScore { get; set; } = 0;
+        public double AverageScore { get; set; } = 0;
         public string PostalCode { get; set; } = "";
         public string Country { get; set; } = "";
         public string Region { get; set; } = "";

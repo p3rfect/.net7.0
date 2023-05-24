@@ -8,8 +8,8 @@
     ".NETCoreApp,Version=v7.0": {
       "TestProject1/1.0.0": {
         "dependencies": {
+          "ASPZIZ": "1.0.0",
           "Microsoft.NET.Test.Sdk": "17.5.0",
-          "WebApplication4": "1.0.0",
           "coverlet.collector": "3.2.0",
           "xunit": "2.4.2",
           "xunit.runner.visualstudio": "2.4.5"
@@ -1144,14 +1144,14 @@
         }
       },
       "xunit.runner.visualstudio/2.4.5": {},
-      "WebApplication4/1.0.0": {
+      "ASPZIZ/1.0.0": {
         "dependencies": {
           "MailKit": "3.6.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.3",
           "Npgsql": "8.0.0-preview.1"
         },
         "runtime": {
-          "WebApplication4.dll": {}
+          "ASPZIZ.dll": {}
         }
       }
     }
@@ -1904,7 +1904,7 @@
       "path": "xunit.runner.visualstudio/2.4.5",
       "hashPath": "xunit.runner.visualstudio.2.4.5.nupkg.sha512"
     },
-    "WebApplication4/1.0.0": {
+    "ASPZIZ/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

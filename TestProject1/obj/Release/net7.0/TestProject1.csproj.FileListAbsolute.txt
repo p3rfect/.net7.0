@@ -1,11 +1,6 @@
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\CoverletSourceRootsMapping
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\testhost.dll
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\WebApplication4.deps.json
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\WebApplication4.runtimeconfig.json
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\appsettings.Development.json
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\appsettings.json
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\WebApplication4.staticwebassets.runtime.json
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\WebApplication4.exe
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\testhost.exe
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\xunit.runner.reporters.netcoreapp10.dll
@@ -104,8 +99,6 @@ C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\n
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\WebApplication4.dll
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\WebApplication4.pdb
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\obj\Release\net7.0\TestProject1.csproj.AssemblyReference.cache
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\obj\Release\net7.0\TestProject1.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\obj\Release\net7.0\TestProject1.AssemblyInfoInputs.cache
@@ -117,3 +110,9 @@ C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\obj\Release\n
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\obj\Release\net7.0\TestProject1.pdb
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\obj\Release\net7.0\TestProject1.genruntimeconfig.cache
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\obj\Release\net7.0\ref\TestProject1.dll
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\ASPZIZ.deps.json
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\ASPZIZ.runtimeconfig.json
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\ASPZIZ.staticwebassets.runtime.json
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\ASPZIZ.exe
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\ASPZIZ.dll
+C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Release\net7.0\ASPZIZ.pdb

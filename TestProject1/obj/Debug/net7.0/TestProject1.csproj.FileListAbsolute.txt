@@ -1,6 +1,5 @@
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Debug\net7.0\CoverletSourceRootsMapping
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Debug\net7.0\testhost.dll
-C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Debug\net7.0\appsettings.json
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Debug\net7.0\testhost.exe
 C:\Users\adoku\source\repos\anastasiadok\main\.net7.0\TestProject1\bin\Debug\net7.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
