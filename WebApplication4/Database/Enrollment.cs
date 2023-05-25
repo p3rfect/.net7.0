@@ -24,13 +24,50 @@ public class Enrollment
         for (int i = 0; i < users.Count; i++)
         {
             int j = i;
-            while (j - 1 > 0 && users[j].Item2 > users[j - 1].Item2)
+            while (j - 1 >= 0 && users[j].Item2 > users[j - 1].Item2)
             {
                 (int, int) dp = (users[j].Item1, users[j].Item2);
                 users[j] = users[j - 1];
                 users[j - 1] = dp;
                 j--;
             }
+        }
+
+        List<string> sp = new List<string>();
+        for (int i = 0; i < users.Count; i++)
+        {
+            await using var findPriority = new NpgsqlCommand($"SELECT * FROM user_specialities WHERE user_id = (@p1) AND priority  = @p2", dataSource)
+            {
+                Parameters =
+                {
+                    new("p1", users[i].Item1),
+                    new ("p2", 1)
+                }
+            };
+            await using var readPriority = await findPriority.ExecuteReaderAsync();
+            if (await readPriority.ReadAsync())
+            {
+                sp.Add(readPriority.GetString(4));
+            }
+
+            await findPriority.DisposeAsync();
+            await readPriority.DisposeAsync();
+        }
+
+        for (int i = 0; i < users.Count; i++)
+        {
+            await using var addStudent = new NpgsqlCommand(
+                "INSERT INTO students(user_id, code) VALUES ((@p1), (@p2))",
+                dataSource)
+            {
+                Parameters =
+                {
+                    new("p1", users[i].Item1),
+                    new("p2", sp[i])
+                }
+            };
+            await addStudent.ExecuteNonQueryAsync();
+            await addStudent.DisposeAsync();
         }
         
         await dataSource.CloseAsync();

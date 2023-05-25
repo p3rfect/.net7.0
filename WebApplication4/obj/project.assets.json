@@ -853,24 +853,28 @@
     ]
   },
   "packageFolders": {
-    "/home/p3rfect/.nuget/packages/": {}
+    "C:\\Users\\Администратор\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/p3rfect/RiderProjects/ASPZIZ1/WebApplication4/ASPZIZ.csproj",
+      "projectUniqueName": "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj",
       "projectName": "ASPZIZ",
-      "projectPath": "/home/p3rfect/RiderProjects/ASPZIZ1/WebApplication4/ASPZIZ.csproj",
-      "packagesPath": "/home/p3rfect/.nuget/packages/",
-      "outputPath": "/home/p3rfect/RiderProjects/ASPZIZ1/WebApplication4/obj/",
+      "projectPath": "D:\\12\\ASPZIZ\\WebApplication4\\ASPZIZ.csproj",
+      "packagesPath": "C:\\Users\\Администратор\\.nuget\\packages\\",
+      "outputPath": "D:\\12\\ASPZIZ\\WebApplication4\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/p3rfect/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Администратор\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -921,7 +925,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/p3rfect/.dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
