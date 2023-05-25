@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text.Json;
 using WebApplication4.Controllers;
+using WebApplication4.Database;
 using WebApplication4.Models;
 using WebApplication4.Models.Interfaces;
 using WebApplication4.Models.Services;
@@ -85,7 +86,7 @@ namespace TestProject1
         [Fact]
         public void UpdateValidUserInfo()
         {
-            var result = accountController.UpdateUserInfo(JsonSerializer.Serialize(new UserInfo()),"adokuchaeva11@gmail.com").Result as JsonResult;
+            var result = accountController.UpdateUserInfo(JsonSerializer.Serialize(new UserInfo()), "adokuchaeva11@gmail.com").Result as JsonResult;
             Assert.True(result is OkObjectResult);
         }
 
@@ -170,7 +171,7 @@ namespace TestProject1
         public void AllUsersList()
         {
             var result = adminController.GetAllUsers().Result as JsonResult;
-            List<string> emails = new(){};
+            List<string> emails = new() { };
 
             var res = result.Value as List<string>;
             for (int i = 0; i < res.Count; i++)
@@ -221,6 +222,96 @@ namespace TestProject1
         {
             var result = adminController.ConfirmUser("adokua11@gmail.com").Result as JsonResult;
             Assert.Equal(result.Value, false);
+        }
+
+
+        [Fact]
+        public void TestGetUserAsync()
+        {
+            var result = DatabaseWRK.GetUserByEmailAsync("adokucheva11@gmail.com").Result;
+            User user = new();
+            Assert.Equal(result, user);
+        }
+
+        [Fact]
+        public void TestGetAllSpecialtiesAsync()
+        {
+            var result = DatabaseWRK.GetAllSpecialtiesAsync().Result;
+            List<Specialty> list = new(){
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерных систем и сетей Программное обеспечение информационных систем", IsPhysics=true, SpecialtyCode = "31 03 04 06" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Проектирование и производство программно-управляемых электронных средств", IsPhysics=true, SpecialtyCode = "39 02 02" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Моделирование и компьютерное проектирование радиоэлектронных средств", IsPhysics=true, SpecialtyCode = "39 02 01" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Программно-управляемые электронно-оптические системы", IsPhysics=true, SpecialtyCode = "36 04 01" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Медицинская электроника", IsPhysics=true, SpecialtyCode = "39 02 03" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Электронные системы безопасности", IsPhysics=true, SpecialtyCode = "39 02 01" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Программируемые мобильные системы", IsPhysics=true, SpecialtyCode ="39 03 02" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Инженерно-психологическое обеспечение информационных технологий", IsPhysics=true, SpecialtyCode ="58 01 01" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Информационные системы и технологии (В обеспечении промышленной безопасности)", IsPhysics=true, SpecialtyCode = "40 05 01-09" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Информационные системы и технологии (В бизнес-менеджменте)", IsPhysics=true, SpecialtyCode = "40 05 01-10" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Проектирование и производство программно-управляемых электронных средств", IsPhysics=true, SpecialtyCode = "39 02 02" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Электронные системы безопасности", IsPhysics=true, SpecialtyCode = "39 03 01" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерного проектирования Программируемые мобильные системы", IsPhysics=true, SpecialtyCode = "39 03 02" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет информационных технологий и управления Автоматизированные системы обработки информации", IsPhysics=true, SpecialtyCode = "53 01 02" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет информационных технологий и управления Искусственный интеллект", IsPhysics=true, SpecialtyCode = "40 03 01" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет информационных технологий и управления Информационные системы и технологии (В игровой индустрии)", IsPhysics=true, SpecialtyCode ="40 05 01-12" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет информационных технологий и управления Промышленная электроника", IsPhysics=true, SpecialtyCode ="36 04 02"},
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет информационных технологий и управления Информационные технологии и управление в технических системах", IsPhysics=true, SpecialtyCode ="53 01 07" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерных систем и сетей Информатика и технологии программирования", IsPhysics=true, SpecialtyCode ="40 40 01" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерных систем и сетей Электронные вычислительные средства", IsPhysics=true, SpecialtyCode ="40 02 02" },
+                new(){FinancingFormPeriod = new(), SpecialtyFacultyAndName="Факультет компьютерных систем и сетей Вычислительные машины, системы и сети", IsPhysics=true, SpecialtyCode = "40 02 01" }
+            };
+            for (int i = 0; i < list.Count; i++)
+            {
+                Assert.Equal(list[i].SpecialtyFacultyAndName, result[i].SpecialtyFacultyAndName);
+                Assert.Equal(list[i].SpecialtyCode, result[i].SpecialtyCode);
+                Assert.Equal(list[i].FinancingFormPeriod, result[i].FinancingFormPeriod);
+                Assert.Equal(list[i].IsPhysics, result[i].IsPhysics);
+            }
+        }
+
+        [Fact]
+        public void TestGetUserSpecialtiesAsync()
+        {
+            var result = DatabaseWRK.GetUserSpecialtiesAsync("adokuchaeva11@gmail.com").Result;
+            UserSpecialties spec = new();
+            Assert.Equal(result, spec);
+        }
+
+        [Fact]
+        public void TestGetUserExamsAsync()
+        {
+            var result = DatabaseWRK.GetUserExamsAsync("adokuchaeva11@gmail.com").Result;
+            Exams exams = new();
+            Assert.Equal(result, exams);
+        }
+
+        [Fact]
+        public void TestGetUserInfoAsync()
+        {
+            var result = DatabaseWRK.GetUserInfoAsync("adokuchaeva11@gmail.com").Result;
+            UserInfo info = new();
+            Assert.Equal(result, info);
+        }
+
+        [Fact]
+        public void TestUpdateUserSpecialtiesAsync()
+        {
+            bool result = DatabaseWRK.UpdateUserSpecialtiesAsync(new UserSpecialties(), "adokuchaeva11@gmail.com").Result;
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void TestUpdateUserInfoAsync()
+        {
+            bool result = DatabaseWRK.UpdateUserInfoAsync(new UserInfo(), "adokuchaeva11@gmail.com").Result;
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void TestUpdateUserExamsAsync()
+        {
+            bool result = DatabaseWRK.UpdateUserExamsAsync(new Exams(), "adokuchaeva11@gmail.com").Result;
+            Assert.True(result);
         }
     }
 }
