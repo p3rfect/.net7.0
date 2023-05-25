@@ -45,9 +45,14 @@ public class Enrollment
                 }
             };
             await using var readPriority = await findPriority.ExecuteReaderAsync();
+            int k = 0;
             if (await readPriority.ReadAsync())
             {
-                sp.Add(readPriority.GetString(4));
+                if (k == 0)
+                {
+                    sp.Add(readPriority.GetString(4));
+                    k = 1;
+                }
             }
 
             await findPriority.DisposeAsync();
